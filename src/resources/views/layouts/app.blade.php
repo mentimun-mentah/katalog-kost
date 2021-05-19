@@ -133,11 +133,10 @@
             <img
               src="{{asset('storage/logo.png')}}"
               alt="docapets"
-              width="40"
-              height="40"
+              width="220"
+              height="35"
               class="d-inline-block align-text-top"
             />
-            <span class="va-sub ml-2">Doca.pets</span>
           </a>
           <button
             class="navbar-toggler"

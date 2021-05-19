@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Jobs\SendEmailRegisterUser;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,6 +48,27 @@ class RegisterController extends Controller
     }
 
     /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+                    ? new JsonResponse([], 201)
+                    : redirect($this->redirectPath());
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -64,10 +91,57 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'token' => Str::random(30)
         ]);
+
+        SendEmailRegisterUser::dispatch($user);
+        toast('Email confirmation has send.','info');
     }
+
+    public function registerKost(Request $request)
+    {
+
+      $request->validate([
+          'name' => 'required|string|max:255',
+          'email' => 'required|string|email|max:255|unique:users',
+          'password' => 'required|string|min:8|confirmed',
+          'phone' => 'required|min:10|max:20|regex:/(08)[0-9]{9}/',
+          'name_kost' => 'required|string|max:255',
+          'address_kost' => 'required|string|max:255',
+      ]);
+
+      $user = User::create([
+          'name' => $request->name,
+          'email' => $request->email,
+          'password' => Hash::make($request->password),
+          'token' => Str::random(30)
+      ]);
+
+      $user->role = 'kost';
+      $user->phone = $request->phone;
+      $user->name_kost = $request->name_kost;
+      $user->address_kost = $request->address_kost;
+      $user->save();
+
+      SendEmailRegisterUser::dispatch($user);
+      toast('Email confirmation has send.','info');
+    }
+
+    public function verify($token,$id)
+    {
+      $user = User::findOrFail($id);
+      if($user->token !== $token) {
+          toast('Token not match!','error');
+          return redirect('/');
+        }
+       $user->status = 1;
+       $user->save();
+
+       Auth::login($user);
+       return redirect('/');
+  }
 }
