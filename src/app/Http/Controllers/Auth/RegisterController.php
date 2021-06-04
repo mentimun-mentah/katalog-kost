@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Jobs\SendEmailRegisterUser;
+use App\Jobs\SendEmailRegisterOwner;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -110,8 +111,7 @@ class RegisterController extends Controller
           'email' => 'required|string|email|max:255|unique:users',
           'password' => 'required|string|min:8|confirmed',
           'phone' => 'required|min:10|max:20|regex:/(08)[0-9]{9}/',
-          'name_kost' => 'required|string|max:255',
-          'address_kost' => 'required|string|max:255',
+          'address' => 'required|string|min:6',
       ]);
 
       $user = User::create([
@@ -121,13 +121,12 @@ class RegisterController extends Controller
           'token' => Str::random(30)
       ]);
 
-      $user->role = 'kost';
+      $user->role = 'owner';
       $user->phone = $request->phone;
-      $user->name_kost = $request->name_kost;
-      $user->address_kost = $request->address_kost;
+      $user->address = $request->address;
       $user->save();
 
-      SendEmailRegisterUser::dispatch($user);
+      SendEmailRegisterOwner::dispatch($user);
       toast('Email confirmation has send.','info');
     }
 

@@ -7,7 +7,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>DOCA PETS</title>
+    <title>KATALOG KOS</title>
     <link rel="icon" href="{{asset('storage/logo.png')}}" />
 
     <!-- Fonts -->
@@ -24,11 +24,20 @@
       href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <link href="{{ asset('css/fontawesome/css/all.css') }}" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" />
     <style>
+      body{
+        font-family: 'Poppins', sans-serif !important;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
       /***** Footer *****/
       .footer-logo-text {
         color: #2c3e50;
@@ -122,6 +131,16 @@
         vertical-align: sub;
       }
       /***** Navbar ******/
+      .side-nav-link {
+        padding-left: 0;
+        padding-right: 0;
+        color: rgba(0, 0, 0, 0.65);
+      }
+      .side-nav-link.active {
+        color: rgba(0, 0, 0);
+        font-weight: 700;
+      }
+
 
     </style>
   </head>
@@ -132,7 +151,7 @@
           <a class="navbar-brand" href="{{ url('/') }}" style="font-family: 'Dela Gothic One', cursive; color:#2c3e50;">
             <img
               src="{{asset('storage/logo.png')}}"
-              alt="docapets"
+              alt="katalogkost"
               width="220"
               height="35"
               class="d-inline-block align-text-top"
@@ -160,11 +179,11 @@
               <li class="nav-item {{Request::is('/') ? 'active': ''}}">
                 <a class="nav-link" href="{{ url('/') }}">Beranda</a>
               </li>
-              <li class="nav-item {{Route::currentRouteName() == 'news' ? 'active': ''}}">
-                <a class="nav-link" href="{{url('/news')}}">Tentang Kami</a>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/#tentangkami') }}">Tentang Kami</a>
               </li>
-              <li class="nav-item {{Route::currentRouteName() == 'doctor' ? 'active': ''}}">
-                <a class="nav-link" href="{{url('/doctor')}}">List Kost</a>
+              <li class="nav-item {{Route::currentRouteName() == 'listkos' ? 'active': ''}}">
+                <a class="nav-link" href="{{url('/list-kos')}}">List Kos</a>
               </li>
 
               <!-- Authentication Links -->
@@ -191,7 +210,15 @@
                   aria-haspopup="true"
                   aria-expanded="false"
                   v-pre
-                > {{ ucfirst(Auth::user()->name) }}
+                > 
+                  <img 
+                    src="{{asset('storage/avatar/'.Auth::user()->avatar)}}" 
+                    class="rounded rounded-circle mr-1" 
+                    alt="profile"
+                    width="30"
+                    height="30"
+                  >
+                  {{ ucfirst(Auth::user()->name) }}
                 </a>
 
                 <div
@@ -201,25 +228,17 @@
                   @if(Auth::user()->role == 'admin')
                   <a
                     class="dropdown-item"
-                    href="{{url('/admin/list-doctor')}}"
+                    href="{{url('/admin/owner-confirmation')}}"
                   >
                     Admin
                   </a>
                   @endif
                   <a
                     class="dropdown-item"
-                    href="{{url('/account')}}"
+                    href="{{url('/account/profile')}}"
                   >
                     Akun
                   </a>
-                  @if(Auth::user()->role == 'doctor')
-                  <a
-                    class="dropdown-item"
-                    href="{{url('/doctor/profile')}}"
-                  >
-                    Profile Dokter
-                  </a>
-                  @endif
                   <a
                     class="dropdown-item"
                     href="{{ route('logout') }}"
@@ -245,22 +264,22 @@
         </div>
       </nav>
 
-      <main class="py-4">
+      <main class="bg-white">
         @yield('content')
       </main>
 
       <!-- FOOTER -->
       <footer>
-        <div class="footer-top">
+        <div class="footer-top border-top">
           <div class="container">
             <div class="row">
               <div class="col-md-4 col-lg-4 footer-about wow fadeInUp">
-                <h1 class="footer-logo-text">Doca.pets</h1>
+                <h1 class="footer-logo-text">Katalog Kos</h1>
                 <p>
-                Doca.pets merupakan aplikasi website untuk memberikan solusi dan dapat membagikan informasi tentang kehilangan hewan peliharaan.
+                Katalog Kos merupakan website sebagai media promosi dan informasi akan tempat kos yang ada di kecamatan kuta selatan.
                 </p>
                 <p class="mb-0">
-                  Copyright © {{date("Y")}} All Rights Reserved by Doca.pets.
+                  Copyright © {{date("Y")}} All Rights Reserved by Katalog Kos.
                 </p>
               </div>
               <div
@@ -268,12 +287,12 @@
               >
                 <h3>Contact us</h3>
                 <p>
-                  <i class="fas fa-map-marker-alt"></i> Jimbaran, Ungasan, Kuta Selatan
+                  <i class="fas fa-map-marker-alt"></i> Kediri, Tabanan, Bali.
                 </p>
-                <p><i class="fas fa-phone"></i> Phone: 0821 3332 1268</p>
+                <p><i class="fas fa-phone"></i> Phone: 081 238 124 543</p>
                 <p>
                   <i class="fas fa-envelope"></i> Email:
-                  <a href="mailto:doca-support@gmail.com">doca-support@gmail.com</a>
+                  <a href="mailto:katalogkos@gmail.com">katalogkos@gmail.com</a>
                 </p>
               </div>
               <div class="col-md-4 col-lg-3 footer-social wow fadeInUp">

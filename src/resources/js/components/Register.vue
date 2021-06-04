@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="container">
+  <div class="bg-white">
+    <div class="container py-4">
       <div class="row justify-content-center">
         <div class="col-md-8">
           <nav>
@@ -25,7 +25,7 @@
                 aria-controls="nav-profile"
                 aria-selected="false"
               >
-                Pemilik Kost
+                Pemilik Kos
               </a>
             </div>
           </nav>
@@ -277,46 +277,22 @@
 
                   <div class="form-group row">
                     <label
-                      for="name_kost"
+                      for="address"
                       class="col-md-4 col-form-label text-md-right"
-                      >Name Kost</label
+                      >Address</label
                     >
                     <div class="col-md-6">
                       <input
-                        id="name_kost"
+                        id="address"
                         type="text"
                         class="form-control"
-                        name="name_kost"
+                        name="address"
                         required
-                        v-model="register_kost.name_kost"
-                        :class="[errors_2.name_kost ? 'is-invalid' : '']"
+                        v-model="register_kost.address"
+                        :class="[errors_2.address ? 'is-invalid' : '']"
                       />
-                      <small class="text-danger" v-if="errors_2.name_kost">
-                        {{ errors_2.name_kost[0] }}
-                      </small>
-                    </div>
-                    <!-- /col-md-6 -->
-                  </div>
-                  <!-- /form-group -->
-
-                  <div class="form-group row">
-                    <label
-                      for="address_kost"
-                      class="col-md-4 col-form-label text-md-right"
-                      >Address Kost</label
-                    >
-                    <div class="col-md-6">
-                      <input
-                        id="address_kost"
-                        type="text"
-                        class="form-control"
-                        name="address_kost"
-                        required
-                        v-model="register_kost.address_kost"
-                        :class="[errors_2.address_kost ? 'is-invalid' : '']"
-                      />
-                      <small class="text-danger" v-if="errors_2.address_kost">
-                        {{ errors_2.address_kost[0] }}
+                      <small class="text-danger" v-if="errors_2.address">
+                        {{ errors_2.address[0] }}
                       </small>
                     </div>
                     <!-- /col-md-6 -->
@@ -365,8 +341,7 @@ export default {
         password: "",
         password_confirmation: "",
         phone: "",
-        name_kost: "",
-        address_kost: "",
+        address: "",
       },
       errors: [],
       errors_2: []
