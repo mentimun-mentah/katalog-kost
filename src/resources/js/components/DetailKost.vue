@@ -189,7 +189,7 @@
             </section>
 
             <section>
-              <h2 class="font-size-review">Kos Exclusive Nyaman</h2>
+              <h2 class="font-size-review">{{kost.name}}</h2>
               <h2 class="fr-review text-muted mb-4">Bagaimana kualitas kos ini secara keseluruhan ?</h2>
               <div class="mb-5">
                 <star-rating
