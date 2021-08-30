@@ -112,6 +112,7 @@ class RegisterController extends Controller
           'password' => 'required|string|min:8|confirmed',
           'phone' => 'required|min:10|max:20|regex:/(08)[0-9]{9}/',
           'address' => 'required|string|min:6',
+          'izin_bangunan' => 'required|string|min:6'
       ]);
 
       $user = User::create([
@@ -124,6 +125,7 @@ class RegisterController extends Controller
       $user->role = 'owner';
       $user->phone = $request->phone;
       $user->address = $request->address;
+      $user->izin_bangunan = $request->izin_bangunan;
       $user->save();
 
       SendEmailRegisterOwner::dispatch($user);

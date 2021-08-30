@@ -15,12 +15,14 @@ class CreateKostsTable extends Migration
     {
         Schema::create('kosts', function (Blueprint $table) {
           $table->id();
-          $table->string('image');
+          $table->text('image');
           $table->string('name');
           $table->text('slug');
           $table->string('category');
           $table->integer('total_rooms');
-          $table->bigInteger('price');
+          $table->bigInteger('price_day')->nullable();
+          $table->bigInteger('price_month')->nullable();
+          $table->bigInteger('price_year')->nullable();
           $table->text('facilities');
           $table->double('lat');
           $table->double('lng');

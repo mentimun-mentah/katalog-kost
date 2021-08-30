@@ -299,6 +299,30 @@
                   </div>
                   <!-- /form-group -->
 
+                  <div class="form-group row">
+                    <label
+                      for="izin_bangunan"
+                      class="col-md-4 col-form-label text-md-right"
+                      >Izin Bangunan</label
+                    >
+                    <div class="col-md-6">
+                      <input
+                        id="izin_bangunan"
+                        type="text"
+                        class="form-control"
+                        name="izin_bangunan"
+                        required
+                        v-model="register_kost.izin_bangunan"
+                        :class="[errors_2.izin_bangunan ? 'is-invalid' : '']"
+                      />
+                      <small class="text-danger" v-if="errors_2.izin_bangunan">
+                        {{ errors_2.izin_bangunan[0] }}
+                      </small>
+                    </div>
+                    <!-- /col-md-6 -->
+                  </div>
+                  <!-- /form-group -->
+
                   <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
                       <button
@@ -342,6 +366,7 @@ export default {
         password_confirmation: "",
         phone: "",
         address: "",
+        izin_bangunan: ""
       },
       errors: [],
       errors_2: []

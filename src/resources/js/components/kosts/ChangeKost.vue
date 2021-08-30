@@ -10,34 +10,81 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
           <div class="card-body">
             <div class="form-row">
-              <div class="form-group col-md-2 col-sm-8">
+
+              <div class="form-group">
                 <label>Foto Kos</label>
-                <img
-                  id="image-preview"
-                  class="card-img-top img-fit upload-img p-t-4 p-r-4 p-b-4 p-l-4 border"
-                  alt="Card image cap"
-                  :src="
-                      url_image
-                          ? url_image
-                          : storage + '/' + update_kost.image
-                  "
-                />
-                <div
-                    class="file-btn btn btn-sm button border mt-2"
-                >
-                  Upload
-                  <input
-                      type="file"
-                      class="fileupload"
-                      name="file"
-                      accept="image/*"
-                      @change="changeKost"
-                  />
-                </div>
-                <small class="text-danger" v-if="errors.image" style="white-space: nowrap;">
-                  {{ errors.image[0] }}
+                <div class="row">
+                  <div 
+                    :key="i"
+                    class="col col-lg-4 col-sm-12"
+                    v-if="update_kost.image.length"
+                    v-for="(img, i) in update_kost.image"
+                  >
+                    <img
+                      id="image-preview"
+                      class="card-img-top img-fit upload-img p-t-4 p-r-4 p-b-4 p-l-4 border"
+                      alt="Card image cap"
+                      :src="
+                        url_image && url_image.length && url_image[i].indexOf('blob:') !== -1
+                          ? url_image[i]
+                          : storage + '/' + img
+                      "
+                    />
+                    <div class="w-100 text-center">
+                      <div class="file-btn btn btn-sm button border mt-2">
+                        Upload
+                        <input
+                          type="file"
+                          class="fileupload"
+                          name="file[]"
+                          accept="image/*"
+                          @change="(e) => changeKost(e, i)"
+                        />
+                      </div>
+                    </div><!--/w-100-->
+                    <small class="text-danger" v-if="errors && errors[`images.${i-1}`]" style="white-space: nowrap;">
+                      {{errors && errors[`images.${i-1}`][0]}}
+                    </small>
+                  </div>
+
+                  <div 
+                    :key="i+1"
+                    class="col col-lg-4 col-sm-12"
+                    v-for="i in 3 - update_kost.image.length"
+                  >
+                    <img
+                      id="image-preview"
+                      class="card-img-top img-fit upload-img p-t-4 p-r-4 p-b-4 p-l-4 border"
+                      alt="Card image cap"
+                      :src="
+                          url_image[update_kost.image.length + 1 - 1]
+                              ? url_image[update_kost.image.length + 1 - 1]
+                              : 'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png'
+                      "
+                    />
+                    <div class="w-100 text-center">
+                      <div class="file-btn btn btn-sm button border mt-2">
+                        Upload
+                        <input
+                          type="file"
+                          class="fileupload"
+                          name="file[]"
+                          accept="image/*"
+                          @change="(e) => changeKost(e, update_kost.image.length + 1 - 1)"
+                        />
+                      </div>
+                    </div><!--/w-100-->
+                    <small class="text-danger" v-if="errors && errors[`images.${i-1}`]" style="white-space: nowrap;">
+                      {{errors && errors[`images.${update_kost.image.length + 1 - 1}`][0]}}
+                    </small>
+                  </div>
+
+                </div><!--/row-->
+                <small class="text-danger" v-if="errors.images" style="white-space: nowrap;">
+                  {{errors && errors.images && errors.images[0]}}
                 </small>
               </div>
+
 
               <div class="form-group col-md-12 col-sm-12">
                 <label>Nama Kos</label>
@@ -52,21 +99,22 @@
                 </small>
               </div>
 
-              <div class="form-group col-md-4 col-sm-4">
+              <div class="form-group col-md-6 col-sm-6">
                 <label>Kategori</label>
                 <select class="form-control" v-model="update_kost.category">
                     <option disabled value=""
                         >Please select one</option
                     >
-                    <option value="mahasiswa">Mahasiswa</option>
                     <option value="umum">Umum</option>
+                    <option value="perempuan">Perempuan</option>
+                    <option value="laki-laki">Laki-laki</option>
                 </select>
                 <small class="text-danger" v-if="errors.category">
                   {{ errors.category[0] }}
                 </small>
               </div>
 
-              <div class="form-group col-md-4 col-sm-4">
+              <div class="form-group col-md-6 col-sm-6">
                 <label>Jumlah Kamar</label>
                 <input
                     type="number"
@@ -80,24 +128,56 @@
               </div>
 
               <div class="form-group col-md-4 col-sm-4">
-                <label>Harga Kos <small>/bulan</small></label>
+                <label>Harga Kos <small>/hari</small></label>
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span
-                        class="input-group-text"
-                        id="basic-addon1"
-                        >Rp</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Rp</span>
                   </div>
                   <input
                     type="number"
                     class="form-control"
                     placeholder="Harga Kos"
-                    v-model="update_kost.price"
+                    v-model="update_kost.price_day"
                   />
                 </div>
-                <small class="text-danger" v-if="errors.price">
-                  {{ errors.price[0] }}
+                <small class="text-danger" v-if="errors.price_day">
+                  {{ errors.price_day[0] }}
+                </small>
+              </div>
+
+              <div class="form-group col-md-4 col-sm-4">
+                <label>Harga Kos <small>/bulan</small></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Rp</span>
+                  </div>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Harga Kos"
+                    v-model="update_kost.price_month"
+                  />
+                </div>
+                <small class="text-danger" v-if="errors.price_month">
+                  {{ errors.price_month[0] }}
+                </small>
+              </div>
+
+              <div class="form-group col-md-4 col-sm-4">
+                <label>Harga Kos <small>/tahun</small></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Rp</span>
+                  </div>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Harga Kos"
+                    v-model="update_kost.price_year"
+                  />
+                </div>
+                <small class="text-danger" v-if="errors.price_year">
+                  {{ errors.price_year[0] }}
                 </small>
               </div>
 
@@ -200,7 +280,7 @@
             </div>
             <!--/form-row-->
 
-            <button class="btn btn-green float-right mb-3" @click="updateKost">
+            <button class="btn btn-green float-right mb-3" @click="updateKost" :disabled="saveDisabled">
               Simpan
             </button>
           </div>
@@ -240,7 +320,8 @@ export default{
   props: ['kost','storage'],
   data(){
     return{
-      url_image: null,
+      saveDisabled: true,
+      url_image: [],
       wifi: false,
       room: false,
       ac: false,
@@ -248,11 +329,13 @@ export default{
       wardrobe: false,
       tv: false,
       update_kost: {
-        image: null,
+        image: [],
         name: "",
         category: "",
         total_rooms: 0,
-        price: 0,
+        price_day: 0,
+        price_month: 0,
+        price_year: 0,
         facilities: [],
         lat: "",
         lng: "",
@@ -263,24 +346,43 @@ export default{
     }
   },
   methods:{
-    changeKost(e){
-      this.update_kost.image = e.target.files[0];
-      this.url_image = URL.createObjectURL(this.update_kost.image);
+    insertAt(arr, index, elements) {
+      arr.splice(index, 1)
+      arr.splice(index, 0, elements)
+      return arr
+    },
+    changeKost(e, i){
+      this.update_kost.image = this.insertAt(this.update_kost.image, i, e.target.files[0])
+      this.url_image = this.insertAt(this.url_image, i, URL.createObjectURL(e.target.files[0]))
     },
     updateKost(){
       let formData = new FormData();
-      if(typeof this.update_kost.image !== 'string') formData.append("image", this.update_kost.image);
+      this.update_kost.image.forEach((img) => {
+        if(typeof img !== 'string') {
+          formData.append("images[]", img)
+        }
+      })
+
+      this.kost.image.split(',').forEach(oldImg => {
+        if(!isIn(oldImg, this.update_kost.image)) {
+          formData.append("delete_image[]", oldImg)
+        }
+      })
 
       formData.append("id", this.kost.id)
       formData.append("name", this.update_kost.name)
       formData.append("category", this.update_kost.category)
       formData.append("total_rooms", this.update_kost.total_rooms)
-      formData.append("price", this.update_kost.price)
       formData.append("facilities", this.update_kost.facilities.join(','))
       formData.append("lat", this.update_kost.lat)
       formData.append("lng", this.update_kost.lng)
       formData.append("address", this.update_kost.address)
       formData.append("desc", this.update_kost.desc)
+
+      if(this.update_kost.price_day > 0) formData.append("price_day", this.update_kost.price_day)
+      if(this.update_kost.price_month > 0) formData.append("price_month", this.update_kost.price_month)
+      if(this.update_kost.price_year > 0) formData.append("price_year", this.update_kost.price_year)
+
       const config = {
           headers: { "content-type": "multipart/form-data" }
       };
@@ -288,17 +390,21 @@ export default{
       axios.post('/kosts/update-kost',formData,config).then(res => {
           location.reload();
       }).catch(err => {
+        console.log(err.response)
           this.errors = err.response.data.errors;
       })
 
     }
   },
   mounted(){
-    this.update_kost.image = this.kost.image
+    this.url_image = this.kost.image.split(',')
+    this.update_kost.image = this.kost.image.split(',')
     this.update_kost.name = this.kost.name
     this.update_kost.category = this.kost.category
     this.update_kost.total_rooms = this.kost.total_rooms
-    this.update_kost.price = this.kost.price
+    this.update_kost.price_day = this.kost.price_day ? this.kost.price_day : 0
+    this.update_kost.price_month = this.kost.price_month ? this.kost.price_month : 0
+    this.update_kost.price_year = this.kost.price_year ? this.kost.price_year : 0
     this.update_kost.lat = this.kost.lat
     this.update_kost.lng = this.kost.lng
     this.update_kost.address = this.kost.address
@@ -314,6 +420,18 @@ export default{
     if(isIn('tv', facilities_arr)) this.tv = true
   },
   watch: {
+    'update_kost.price_day'(val){
+      if(val > 0) this.saveDisabled = false;
+      else this.saveDisabled = true;
+    },
+    'update_kost.price_month'(val){
+      if(val > 0) this.saveDisabled = false;
+      else this.saveDisabled = true;
+    },
+    'update_kost.price_year'(val){
+      if(val > 0) this.saveDisabled = false;
+      else this.saveDisabled = true;
+    },
     wifi(val){
       if(val) this.update_kost.facilities.push('wifi')
       else {
@@ -379,7 +497,6 @@ export default{
     cursor: pointer;
     text-align: center;
     margin: 0 auto;
-    left: 21%;
 }
 .fileupload {
     cursor: pointer;

@@ -29,30 +29,43 @@ class KostController extends Controller
 
     public function createKost(Request $request)
     {
-     $request->validate([
-        'image' => 'required|mimes:jpg,jpeg,png|max:2000',
-        'name' => 'required|string|min:3|max:255',
-        'category' => 'required|string|in:mahasiswa,umum',
-        'total_rooms' => 'required|integer|min:1',
-        'price' => 'required|integer|min:1',
-        'facilities' => 'required|string|min:1',
-        'lat' => ['required','regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],
-        'lng' => ['required','regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],
-        'address' => 'required|string|min:6',
-        'desc' => 'required|string|min:5',
-     ]);
+
+      $request->validate([
+          'images' => 'required',
+          'images.*' => 'mimes:jpg,jpeg,png|max:2000',
+          'name' => 'required|string|min:3|max:255',
+          'category' => 'required|string|in:laki-laki,perempuan,umum',
+          'total_rooms' => 'required|integer|min:1',
+          'price_day' => 'nullable|integer|min:1',
+          'price_month' => 'nullable|integer|min:1',
+          'price_year' => 'nullable|integer|min:1',
+          'facilities' => 'required|string|min:1',
+          'lat' => ['required','regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],
+          'lng' => ['required','regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],
+          'address' => 'required|string|min:6',
+          'desc' => 'required|string|min:5',
+      ]);
+
+      $imgData = array();
 
       # save image to storage
-      $photoName = Str::random(20).'.'.$request->image->getClientOriginalExtension();
-      $request->image->move(public_path('storage/kosts/'),$photoName);
+      if($request->hasfile('images')) {
+        foreach($request->file('images') as $file){
+          $name = Str::random(20).'.'.$file->getClientOriginalExtension();
+          $file->move(public_path('storage/kosts/'),$name);
+          $imgData[] = $name;  
+        }
+      }
 
       Kost::create([
-        'image' => $photoName,
+        'image' => implode(",",$imgData),
         'name' => $request->name,
         'slug' => Str::slug($request->name,'-'),
         'category' => $request->category,
         'total_rooms' => $request->total_rooms,
-        'price' => $request->price,
+        'price_day' => $request->price_day,
+        'price_month' => $request->price_month,
+        'price_year' => $request->price_year,
         'facilities' => $request->facilities,
         'lat' => $request->lat,
         'lng' => $request->lng,
@@ -96,11 +109,15 @@ class KostController extends Controller
       $kost = Kost::findOrFail($request->id);
 
       $request->validate([
-        'image' => 'nullable|mimes:jpg,jpeg,png|max:2000',
+        'images' => 'nullable',
+        'images.*' => 'mimes:jpg,jpeg,png|max:2000',
+        'delete_image' => 'nullable',
         'name' => 'required|string|min:3|max:255',
-        'category' => 'required|string|in:mahasiswa,umum',
+        'category' => 'required|string|in:laki-laki,perempuan,umum',
         'total_rooms' => 'required|integer|min:1',
-        'price' => 'required|integer|min:1',
+        'price_day' => 'nullable|integer|min:1',
+        'price_month' => 'nullable|integer|min:1',
+        'price_year' => 'nullable|integer|min:1',
         'facilities' => 'required|string|min:1',
         'lat' => ['required','regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],
         'lng' => ['required','regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/'],
@@ -112,7 +129,9 @@ class KostController extends Controller
       $kost->slug = Str::slug($request->name,'-');
       $kost->category = $request->category;
       $kost->total_rooms = $request->total_rooms;
-      $kost->price = $request->price;
+      $kost->price_day = $request->price_day;
+      $kost->price_month = $request->price_month;
+      $kost->price_year = $request->price_year;
       $kost->facilities = $request->facilities;
       $kost->lat = $request->lat;
       $kost->lng = $request->lng;
@@ -121,14 +140,39 @@ class KostController extends Controller
       $kost->save();
 
       # update image
-      $imagePath = public_path('storage/kosts/'.$kost->image);
-      if($request->image && file_exists($imagePath)){
-          unlink($imagePath);
-          # save image to storage
-          $photoName = Str::random(20).'.'.$request->image->getClientOriginalExtension();
-          $request->image->move(public_path('storage/kosts/'),$photoName);
-          $kost->image = $photoName;
-          $kost->save();
+      if($request->has('delete_image')){
+        foreach($request->delete_image as $file){
+          $imagePath = public_path('storage/kosts/'.$file);
+          if(file_exists($imagePath)){
+            unlink($imagePath);
+          }
+        }
+      }
+
+      # save image to storage
+      if($request->hasfile('images')) {
+
+        $imgData = array();
+
+        foreach($request->file('images') as $file){
+          $name = Str::random(20).'.'.$file->getClientOriginalExtension();
+          $file->move(public_path('storage/kosts/'),$name);
+          $imgData[] = $name;  
+        }
+
+        foreach(explode(",",$kost->image) as $img){
+          if($request->has('delete_image')){
+            if(in_array($img,$request->delete_image) == false){
+              $imgData[] = $img;
+              continue;
+            }
+          }else{
+            $imgData[] = $img;
+          }
+        }
+
+        $kost->image = implode(",",$imgData);
+        $kost->save();
       }
 
       toast('Success update kost','success');

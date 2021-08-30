@@ -2159,6 +2159,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2333,9 +2363,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['price', 'name', 'image', 'address', 'tRooms', 'facilities', 'storage', 'home', 'slug', 'user_id', 'score'],
+  props: ['id', 'price_day', 'price_month', 'price_year', 'name', 'image', 'address', 'tRooms', 'facilities', 'storage', 'home', 'slug', 'user_id', 'score'],
   data: function data() {
     return {
       wifi: false,
@@ -2504,6 +2560,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2517,11 +2581,14 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Semua',
         value: ''
       }, {
-        text: 'Mahasiswa',
-        value: 'mahasiswa'
-      }, {
         text: 'Umum',
         value: 'umum'
+      }, {
+        text: 'Perempuan',
+        value: 'perempuan'
+      }, {
+        text: 'Laki-laki',
+        value: 'laki-laki'
       }],
       center: {
         lat: -8.575592160439113,
@@ -2723,7 +2790,7 @@ __webpack_require__.r(__webpack_exports__);
       }, 1000);
     },
     toggleInfoWindow: function toggleInfoWindow(marker, idx) {
-      var content = "\n      <h6 class=\"font-weight-bold\" style=\"padding:15px;padding-bottom:7px;\"> \n        ".concat(this.kFormatter(marker.price), " \n      </h6>");
+      var content = "\n      <div>\n        <h6 class=\"font-weight-bold mb-0 ".concat(marker.price_day <= 0 ? 'd-none' : '', "\" style=\"padding:10px;padding-bottom:7px;\"> \n          ").concat(this.kFormatter(marker.price_day), " /hari\n        </h6>\n        <h6 class=\"font-weight-bold mb-0 ").concat(marker.price_month <= 0 ? 'd-none' : '', "\" style=\"padding:10px;padding-bottom:7px;\"> \n          ").concat(this.kFormatter(marker.price_month), " /bulan\n        </h6>\n        <h6 class=\"font-weight-bold mb-0 ").concat(marker.price_year <= 0 ? 'd-none' : '', "\" style=\"padding:10px;padding-bottom:7px;\"> \n          ").concat(this.kFormatter(marker.price_year), " /tahun\n        </h6>\n      </div>\n        ");
       this.infoWindowPos = {
         lat: marker.lat,
         lng: marker.lng
@@ -2733,7 +2800,7 @@ __webpack_require__.r(__webpack_exports__);
       this.currentMidx = idx;
     },
     markerInfoWindow: function markerInfoWindow(marker, idx) {
-      var content = "\n      <img src=\"".concat(this.storage, "/kosts/").concat(marker.image, "\" class=\"img-marker\">\n      <div class=\"info\">\n        <div class=\"location text-truncate\">\n        <i class=\"fal fa-map-marker-alt mr-1\"></i> <span class=\"text-secondary\">").concat(marker.address, "</span>\n        </div>\n        <div class=\"title mt-2 text-truncate mb-1\">\n          ").concat(marker.name, "\n        </div>\n\n        <span class=\"").concat(marker.facilities.indexOf('room') !== -1 ? ' ' : 'd-none', " font-weight-normal pl-0 mr-1 bd-right badge\">\n          <i class=\"far fa-bed fa-lg mr-2\"></i>\n        </span>\n        <span class=\"").concat(marker.facilities.indexOf('ac') !== -1 ? ' ' : 'd-none', " font-weight-normal pl-0 mr-1 bd-right badge\">\n          <i class=\"far fa-air-conditioner fa-lg mr-2\"></i>\n        </span>\n        <span class=\"").concat(marker.facilities.indexOf('wifi') !== -1 ? ' ' : 'd-none', " font-weight-normal pl-0 mr-1 bd-right badge\">\n          <i class=\"far fa-wifi fa-lg mr-2\"></i>\n        </span>\n        <span class=\"").concat(marker.facilities.indexOf('tv') !== -1 ? ' ' : 'd-none', " font-weight-normal pl-0 mr-1 bd-right badge\">\n          <i class=\"far fa-tv fa-lg mr-2\"></i>\n        </span>\n        <span class=\"").concat(marker.facilities.indexOf('parking') !== -1 ? ' ' : 'd-none', " font-weight-normal pl-0 mr-1 bd-right badge\">\n          <i class=\"far fa-parking-circle fa-lg mr-2\"></i>\n        </span>\n        <span class=\"").concat(marker.facilities.indexOf('wardrobe') !== -1 ? ' ' : 'd-none', " font-weight-normal pl-0 mr-1 bd-right badge\">\n          <i class=\"far fa-cabinet-filing fa-lg mr-2\"></i>\n        </span>\n      </div>");
+      var content = "\n      <img src=\"".concat(this.storage, "/kosts/").concat(marker.image.split(',')[0], "\" class=\"img-marker\">\n      <div class=\"info\">\n        <div class=\"location text-truncate\">\n        <i class=\"fal fa-map-marker-alt mr-1\"></i> <span class=\"text-secondary\">").concat(marker.address, "</span>\n        </div>\n        <div class=\"title mt-2 text-truncate mb-1\">\n          ").concat(marker.name, "\n        </div>\n\n        <span class=\"").concat(marker.facilities.indexOf('room') !== -1 ? ' ' : 'd-none', " font-weight-normal pl-0 mr-1 bd-right badge\">\n          <i class=\"far fa-bed fa-lg mr-2\"></i>\n        </span>\n        <span class=\"").concat(marker.facilities.indexOf('ac') !== -1 ? ' ' : 'd-none', " font-weight-normal pl-0 mr-1 bd-right badge\">\n          <i class=\"far fa-air-conditioner fa-lg mr-2\"></i>\n        </span>\n        <span class=\"").concat(marker.facilities.indexOf('wifi') !== -1 ? ' ' : 'd-none', " font-weight-normal pl-0 mr-1 bd-right badge\">\n          <i class=\"far fa-wifi fa-lg mr-2\"></i>\n        </span>\n        <span class=\"").concat(marker.facilities.indexOf('tv') !== -1 ? ' ' : 'd-none', " font-weight-normal pl-0 mr-1 bd-right badge\">\n          <i class=\"far fa-tv fa-lg mr-2\"></i>\n        </span>\n        <span class=\"").concat(marker.facilities.indexOf('parking') !== -1 ? ' ' : 'd-none', " font-weight-normal pl-0 mr-1 bd-right badge\">\n          <i class=\"far fa-parking-circle fa-lg mr-2\"></i>\n        </span>\n        <span class=\"").concat(marker.facilities.indexOf('wardrobe') !== -1 ? ' ' : 'd-none', " font-weight-normal pl-0 mr-1 bd-right badge\">\n          <i class=\"far fa-cabinet-filing fa-lg mr-2\"></i>\n        </span>\n      </div>");
       this.infoWindowPos = {
         lat: marker.lat,
         lng: marker.lng
@@ -2794,6 +2861,69 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3325,6 +3455,30 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["home"],
   data: function data() {
@@ -3341,7 +3495,8 @@ __webpack_require__.r(__webpack_exports__);
         password: "",
         password_confirmation: "",
         phone: "",
-        address: ""
+        address: "",
+        izin_bangunan: ""
       },
       errors: [],
       errors_2: []
@@ -3772,6 +3927,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['storage'],
   data: function data() {
@@ -3818,6 +3978,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -4206,11 +4371,59 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      url_image: null,
+      saveDisabled: true,
+      url_image: [],
       wifi: false,
       room: false,
       ac: false,
@@ -4218,11 +4431,13 @@ __webpack_require__.r(__webpack_exports__);
       wardrobe: false,
       tv: false,
       add_kost: {
-        image: null,
+        image: [],
         name: "",
         category: "",
         total_rooms: 0,
-        price: 0,
+        price_day: 0,
+        price_month: 0,
+        price_year: 0,
         facilities: [],
         lat: "",
         lng: "",
@@ -4233,24 +4448,33 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    changeKost: function changeKost(e) {
-      this.add_kost.image = e.target.files[0];
-      this.url_image = URL.createObjectURL(this.add_kost.image);
+    insertAt: function insertAt(arr, index, elements) {
+      arr.splice(index, 1);
+      arr.splice(index, 0, elements);
+      return arr;
+    },
+    changeKost: function changeKost(e, i) {
+      this.add_kost.image = this.insertAt(this.add_kost.image, i, e.target.files[0]);
+      this.url_image = this.insertAt(this.url_image, i, URL.createObjectURL(e.target.files[0]));
     },
     addKost: function addKost() {
       var _this = this;
 
       var formData = new FormData();
-      formData.append("image", this.add_kost.image);
+      this.add_kost.image.forEach(function (img, i) {
+        formData.append("images[]", img);
+      });
       formData.append("name", this.add_kost.name);
       formData.append("category", this.add_kost.category);
       formData.append("total_rooms", this.add_kost.total_rooms);
-      formData.append("price", this.add_kost.price);
       formData.append("facilities", this.add_kost.facilities.join(','));
       formData.append("lat", this.add_kost.lat);
       formData.append("lng", this.add_kost.lng);
       formData.append("address", this.add_kost.address);
       formData.append("desc", this.add_kost.desc);
+      if (this.add_kost.price_day > 0) formData.append("price_day", this.add_kost.price_day);
+      if (this.add_kost.price_month > 0) formData.append("price_month", this.add_kost.price_month);
+      if (this.add_kost.price_year > 0) formData.append("price_year", this.add_kost.price_year);
       var config = {
         headers: {
           "content-type": "multipart/form-data"
@@ -4260,12 +4484,14 @@ __webpack_require__.r(__webpack_exports__);
         _this.$toast.success(res.data.status);
 
         _this.errors = [];
-        _this.url_image = null;
-        _this.add_kost.image = null;
+        _this.url_image = [];
+        _this.add_kost.image = [];
         _this.add_kost.name = "";
         _this.add_kost.category = "";
         _this.add_kost.total_rooms = 0;
-        _this.add_kost.price = 0;
+        _this.add_kost.price_day = 0;
+        _this.add_kost.price_month = 0;
+        _this.add_kost.price_year = 0;
         _this.add_kost.facilities = [];
         _this.add_kost.lat = "";
         _this.add_kost.lng = "";
@@ -4278,11 +4504,21 @@ __webpack_require__.r(__webpack_exports__);
         _this.wardrobe = false;
         _this.tv = false;
       })["catch"](function (err) {
+        console.log(err.response);
         _this.errors = err.response.data.errors;
       });
     }
   },
   watch: {
+    'add_kost.price_day': function add_kostPrice_day(val) {
+      if (val > 0) this.saveDisabled = false;else this.saveDisabled = true;
+    },
+    'add_kost.price_month': function add_kostPrice_month(val) {
+      if (val > 0) this.saveDisabled = false;else this.saveDisabled = true;
+    },
+    'add_kost.price_year': function add_kostPrice_year(val) {
+      if (val > 0) this.saveDisabled = false;else this.saveDisabled = true;
+    },
     wifi: function wifi(val) {
       if (val) this.add_kost.facilities.push('wifi');else {
         var idx = this.add_kost.facilities.indexOf('wifi');
@@ -4591,12 +4827,93 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['kost', 'storage'],
   data: function data() {
     return {
-      url_image: null,
+      saveDisabled: true,
+      url_image: [],
       wifi: false,
       room: false,
       ac: false,
@@ -4604,11 +4921,13 @@ __webpack_require__.r(__webpack_exports__);
       wardrobe: false,
       tv: false,
       update_kost: {
-        image: null,
+        image: [],
         name: "",
         category: "",
         total_rooms: 0,
-        price: 0,
+        price_day: 0,
+        price_month: 0,
+        price_year: 0,
         facilities: [],
         lat: "",
         lng: "",
@@ -4619,25 +4938,41 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    changeKost: function changeKost(e) {
-      this.update_kost.image = e.target.files[0];
-      this.url_image = URL.createObjectURL(this.update_kost.image);
+    insertAt: function insertAt(arr, index, elements) {
+      arr.splice(index, 1);
+      arr.splice(index, 0, elements);
+      return arr;
+    },
+    changeKost: function changeKost(e, i) {
+      this.update_kost.image = this.insertAt(this.update_kost.image, i, e.target.files[0]);
+      this.url_image = this.insertAt(this.url_image, i, URL.createObjectURL(e.target.files[0]));
     },
     updateKost: function updateKost() {
       var _this = this;
 
       var formData = new FormData();
-      if (typeof this.update_kost.image !== 'string') formData.append("image", this.update_kost.image);
+      this.update_kost.image.forEach(function (img) {
+        if (typeof img !== 'string') {
+          formData.append("images[]", img);
+        }
+      });
+      this.kost.image.split(',').forEach(function (oldImg) {
+        if (!validator_lib_isIn__WEBPACK_IMPORTED_MODULE_0___default()(oldImg, _this.update_kost.image)) {
+          formData.append("delete_image[]", oldImg);
+        }
+      });
       formData.append("id", this.kost.id);
       formData.append("name", this.update_kost.name);
       formData.append("category", this.update_kost.category);
       formData.append("total_rooms", this.update_kost.total_rooms);
-      formData.append("price", this.update_kost.price);
       formData.append("facilities", this.update_kost.facilities.join(','));
       formData.append("lat", this.update_kost.lat);
       formData.append("lng", this.update_kost.lng);
       formData.append("address", this.update_kost.address);
       formData.append("desc", this.update_kost.desc);
+      if (this.update_kost.price_day > 0) formData.append("price_day", this.update_kost.price_day);
+      if (this.update_kost.price_month > 0) formData.append("price_month", this.update_kost.price_month);
+      if (this.update_kost.price_year > 0) formData.append("price_year", this.update_kost.price_year);
       var config = {
         headers: {
           "content-type": "multipart/form-data"
@@ -4646,16 +4981,20 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/kosts/update-kost', formData, config).then(function (res) {
         location.reload();
       })["catch"](function (err) {
+        console.log(err.response);
         _this.errors = err.response.data.errors;
       });
     }
   },
   mounted: function mounted() {
-    this.update_kost.image = this.kost.image;
+    this.url_image = this.kost.image.split(',');
+    this.update_kost.image = this.kost.image.split(',');
     this.update_kost.name = this.kost.name;
     this.update_kost.category = this.kost.category;
     this.update_kost.total_rooms = this.kost.total_rooms;
-    this.update_kost.price = this.kost.price;
+    this.update_kost.price_day = this.kost.price_day ? this.kost.price_day : 0;
+    this.update_kost.price_month = this.kost.price_month ? this.kost.price_month : 0;
+    this.update_kost.price_year = this.kost.price_year ? this.kost.price_year : 0;
     this.update_kost.lat = this.kost.lat;
     this.update_kost.lng = this.kost.lng;
     this.update_kost.address = this.kost.address;
@@ -4670,6 +5009,15 @@ __webpack_require__.r(__webpack_exports__);
     if (validator_lib_isIn__WEBPACK_IMPORTED_MODULE_0___default()('tv', facilities_arr)) this.tv = true;
   },
   watch: {
+    'update_kost.price_day': function update_kostPrice_day(val) {
+      if (val > 0) this.saveDisabled = false;else this.saveDisabled = true;
+    },
+    'update_kost.price_month': function update_kostPrice_month(val) {
+      if (val > 0) this.saveDisabled = false;else this.saveDisabled = true;
+    },
+    'update_kost.price_year': function update_kostPrice_year(val) {
+      if (val > 0) this.saveDisabled = false;else this.saveDisabled = true;
+    },
     wifi: function wifi(val) {
       if (val) this.update_kost.facilities.push('wifi');else {
         var idx = this.update_kost.facilities.indexOf('wifi');
@@ -4842,6 +5190,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['home', 'storage'],
   data: function data() {
@@ -4853,11 +5226,14 @@ __webpack_require__.r(__webpack_exports__);
         text: 'Semua',
         value: ''
       }, {
-        text: 'Mahasiswa',
-        value: 'mahasiswa'
-      }, {
         text: 'Umum',
         value: 'umum'
+      }, {
+        text: 'Perempuan',
+        value: 'perempuan'
+      }, {
+        text: 'Laki-laki',
+        value: 'laki-laki'
       }]
     };
   },
@@ -4867,6 +5243,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       axios.get("/kosts/get-my-kost?page=".concat(page, "&q=").concat(this.search, "&category=").concat(this.selected)).then(function (res) {
+        console.log(res.data.data);
         _this.allKosts = res.data;
       });
     },
@@ -9559,7 +9936,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* title property */\n.w-comment {\n  width:126%;\n}\n.desc-text {\n    color: #242526;\n    font-size: 14px;\n    display: inline-block;\n}\n.fs-18 {\n    font-size: 18px !important;\n}\n.fs-14 {\n    font-size: 14px !important;\n}\n.img-fit {\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n/* image  detail*/\n.small-img-desktop .smooth-image {\n    height: 181px !important;\n}\n.image-left-radius > .smooth-image-wrapper img {\n    border-radius: 15px 15px 15px 15px;\n}\n.row-ml-9px {\n    margin-left: -9px;\n}\n.smooth-image-wrapper {\n    position: relative;\n}\n.smooth-image-wrapper .smooth-image {\n    transition: opacity 1s;\n}\n.smooth-image-wrapper .img-visible {\n    opacity: 1;\n}\n.big-img-desktop .smooth-image {\n    height: 600px !important;\n    width: 100%;\n}\n/* Fasilitas Detail*/\n.property-amenities {\n    padding: 10px 30px 10px 30px;\n}\n.property-amenities ul li {\n    float: left;\n    width: 33%;\n    margin-bottom: 15px;\n    list-style: none;\n}\n/* Agent */\n.bg-call {\n  background-color: #38c172;\n  color: white;\n  border: 2px solid white;\n}\n.bg-call:hover {\n  color: white;\n}\n.bg-call:focus {\n  color: white;\n}\n.avatar {\n  vertical-align: middle;\n  width: 100px;\n  height: 100px;\n  border-radius: 50%;\n  border: 2px solid white;\n}\n.rounded-inquiry {\n  border-radius: 10px;\n}\n.property-inquiry {\n  position: sticky;\n  top: 2%;\n}\n.editr {\n  border-radius: 0.25rem;\n  border: 1px solid #e4e4e4;\n  width: 100%;\n}\n.editr--toolbar {\n  background: #f6f6f6;\n  border-top-left-radius: 0.25rem;\n  border-top-right-radius: 0.25rem;\n  border-bottom: 1px solid #e4e4e4;\n  position: relative;\n  display: flex;\n  height: 32px;\n}\n.editr--toolbar a {\n  display: inline-block;\n  width: 8vw;\n  max-width: 32px;\n  height: 32px;\n  color: #333;\n  fill: #333;\n  cursor: pointer;\n  text-align: center;\n  line-height: 1;\n}\n.editr--toolbar a:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n.editr--toolbar a:active {\n  background: rgba(0, 0, 0, 0.2);\n}\n.editr--toolbar a svg {\n  width: 16px;\n  height: 16px;\n  margin: 8px auto;\n}\n.editr--toolbar a svg path {\n  fill: inherit;\n}\n.editr--toolbar a.vw-btn-separator {\n  width: 1px;\n  margin: 0 8px;\n}\n.editr--toolbar a.vw-btn-separator:hover {\n  background: initial;\n  cursor: default;\n}\n.editr--toolbar a.vw-btn-separator i.vw-separator {\n  border-left: 1px solid rgba(0, 0, 0, 0.1);\n  height: 100%;\n  position: absolute;\n  width: 1px;\n}\n.editr--toolbar .dashboard {\n  width: 100%;\n  position: absolute;\n  top: 32px;\n  left: 0;\n  text-align: left;\n  padding: 8px 16px;\n  background: rgba(255, 255, 255, 0.95);\n  border: 1px solid #f6f6f6;\n}\n.editr--content {\n  min-height: 150px;\n  padding: 12px 8px 16px 8px;\n  line-height: 1.33;\n  font-family: inherit;\n  color: inherit;\n  overflow-y: auto;\n  background: rgba(255, 255, 255, 0.95);\n  border-bottom-left-radius: 0.25rem;\n  border-bottom-right-radius: 0.25rem;\n}\n.editr--content[contenteditable=\"true\"]:empty:before {\n  content: attr(placeholder);\n  color: rgba(0, 0, 0, 0.3);\n  display: block; /* For Firefox */\n}\n.editr--content img {\n  max-width: 100%;\n}\n.editr--content table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.editr--content table th {\n  text-align: left;\n}\n.editr--content table th,\n.editr--content table td {\n  border: 1px solid #ddd;\n  padding: 2px;\n}\n.editr--content:focus {\n  outline: 0;\n}\n.editr--content ul li,\n.editr--content ol li {\n  list-style-position: inside;\n}\n@media screen and (max-width: 320px) {\n.editr--toolbar a {\n    margin: 0 2px;\n}\n.editr--toolbar a.vw-btn-separator {\n    display: none;\n}\n}\n/* Review */\n.rating_circle{\n   width: 120px;\n   height: 120px;\n   border-radius: 70px;\n   border: 1px none;\n   background-color: #ffffff00;\n}\n.rating_text{\n     margin-top: 35px;\n}\n.stars-outer {\n display: inline-block;\n position: relative;\n font-family: FontAwesome;\n font-size: 20px;\n letter-spacing: 5px;\n}\n.stars-outer::before {\n  content: \"\\f006 \\f006 \\f006 \\f006 \\f006\";\n}\n.stars-inner {\n  position: absolute;\n  top: 0;\n  left: 0;\n  white-space: nowrap;\n  overflow: hidden;\n  width: 0;\n}\n.stars-inner::before {\ncontent: \"\\f005 \\f005 \\f005 \\f005 \\f005\";\ncolor: #000000;\n}\n.green {\n  background-color: #03ac0e;\n}\n.c-green{\n  color: #03ac0e;\n}\n.fs-60{\n  font-size: 60px;\n}\n.progress-h {\n  height: 5px;\n}\n.mt-20 {\n  margin-top: 20px !important;\n}\n.rating-color {\n  color: #ffc400;\n}\n.btn-outline-green {\n    color: #03ac0e;\n    border-color: #03ac0e;\n}\n.font-size-review{\n  font-size: 1.14286rem;\n}\n.fr-review{\n  font-weight: 400;\n  font-size: 0.857143rem;\n  color: var(--color-text-low,rgba(49,53,59,0.68));\n}\n.title-review{\n  font-size: 1rem;\n  font-weight: 400;\n  text-transform: none;\n  margin-top: 10px;\n  line-height: 22px;\n}\n/* comment display */\n.img {\n  width: 50px;\n  height: 50px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.w-126 {\n  width: 126%;\n}\n.related-topic-card {\n  padding: 20px 0 17px;\n  border-bottom: solid 1px #e0e0e0;\n}\n.topic-info {\n  float: right;\n  text-align: right;\n  font-size: 14px;\n}\n.topic-container {\n  margin-bottom: 16px;\n  display: inline-flex;\n}\n.topic-detail {\n  width: 714px;\n  overflow-wrap: break-word;\n}\n.topic-title {\n  display: inline-block;\n  width: 350px;\n  vertical-align: top;\n  margin-left: 16px;\n}\n\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* title property */\n.w-comment {\n  width:126%;\n}\n.desc-text {\n    color: #242526;\n    font-size: 14px;\n    display: inline-block;\n}\n.fs-18 {\n    font-size: 18px !important;\n}\n.fs-14 {\n    font-size: 14px !important;\n}\n.img-fit {\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n/* image  detail*/\n.small-img-desktop .smooth-image {\n    height: 181px !important;\n}\n.image-left-radius > .smooth-image-wrapper img {\n    border-radius: 15px 15px 15px 15px;\n}\n.row-ml-9px {\n    margin-left: -9px;\n}\n.smooth-image-wrapper {\n    position: relative;\n}\n.smooth-image-wrapper .smooth-image {\n    transition: opacity 1s;\n}\n.smooth-image-wrapper .img-visible {\n    opacity: 1;\n}\n.big-img-desktop .smooth-image {\n    height: 600px !important;\n    width: 100%;\n}\n/* Fasilitas Detail*/\n.property-amenities {\n    padding: 10px 30px 10px 30px;\n}\n.property-amenities ul li {\n    float: left;\n    width: 33%;\n    margin-bottom: 15px;\n    list-style: none;\n}\n/* Agent */\n.bg-call {\n  background-color: #38c172;\n  color: white;\n  border: 2px solid white;\n}\n.bg-call:hover {\n  color: white;\n}\n.bg-call:focus {\n  color: white;\n}\n.avatar {\n  vertical-align: middle;\n  width: 100px;\n  height: 100px;\n  border-radius: 50%;\n  border: 2px solid white;\n}\n.rounded-inquiry {\n  border-radius: 10px;\n}\n.property-inquiry {\n  position: sticky;\n  top: 2%;\n}\n.editr {\n  border-radius: 0.25rem;\n  border: 1px solid #e4e4e4;\n  width: 100%;\n}\n.editr--toolbar {\n  background: #f6f6f6;\n  border-top-left-radius: 0.25rem;\n  border-top-right-radius: 0.25rem;\n  border-bottom: 1px solid #e4e4e4;\n  position: relative;\n  display: flex;\n  height: 32px;\n}\n.editr--toolbar a {\n  display: inline-block;\n  width: 8vw;\n  max-width: 32px;\n  height: 32px;\n  color: #333;\n  fill: #333;\n  cursor: pointer;\n  text-align: center;\n  line-height: 1;\n}\n.editr--toolbar a:hover {\n  background: rgba(0, 0, 0, 0.1);\n}\n.editr--toolbar a:active {\n  background: rgba(0, 0, 0, 0.2);\n}\n.editr--toolbar a svg {\n  width: 16px;\n  height: 16px;\n  margin: 8px auto;\n}\n.editr--toolbar a svg path {\n  fill: inherit;\n}\n.editr--toolbar a.vw-btn-separator {\n  width: 1px;\n  margin: 0 8px;\n}\n.editr--toolbar a.vw-btn-separator:hover {\n  background: initial;\n  cursor: default;\n}\n.editr--toolbar a.vw-btn-separator i.vw-separator {\n  border-left: 1px solid rgba(0, 0, 0, 0.1);\n  height: 100%;\n  position: absolute;\n  width: 1px;\n}\n.editr--toolbar .dashboard {\n  width: 100%;\n  position: absolute;\n  top: 32px;\n  left: 0;\n  text-align: left;\n  padding: 8px 16px;\n  background: rgba(255, 255, 255, 0.95);\n  border: 1px solid #f6f6f6;\n}\n.editr--content {\n  min-height: 150px;\n  padding: 12px 8px 16px 8px;\n  line-height: 1.33;\n  font-family: inherit;\n  color: inherit;\n  overflow-y: auto;\n  background: rgba(255, 255, 255, 0.95);\n  border-bottom-left-radius: 0.25rem;\n  border-bottom-right-radius: 0.25rem;\n}\n.editr--content[contenteditable=\"true\"]:empty:before {\n  content: attr(placeholder);\n  color: rgba(0, 0, 0, 0.3);\n  display: block; /* For Firefox */\n}\n.editr--content img {\n  max-width: 100%;\n}\n.editr--content table {\n  width: 100%;\n  border-collapse: collapse;\n}\n.editr--content table th {\n  text-align: left;\n}\n.editr--content table th,\n.editr--content table td {\n  border: 1px solid #ddd;\n  padding: 2px;\n}\n.editr--content:focus {\n  outline: 0;\n}\n.editr--content ul li,\n.editr--content ol li {\n  list-style-position: inside;\n}\n@media screen and (max-width: 320px) {\n.editr--toolbar a {\n    margin: 0 2px;\n}\n.editr--toolbar a.vw-btn-separator {\n    display: none;\n}\n}\n/* Review */\n.rating_circle{\n   width: 120px;\n   height: 120px;\n   border-radius: 70px;\n   border: 1px none;\n   background-color: #ffffff00;\n}\n.rating_text{\n     margin-top: 35px;\n}\n.stars-outer {\n display: inline-block;\n position: relative;\n font-family: FontAwesome;\n font-size: 20px;\n letter-spacing: 5px;\n}\n.stars-outer::before {\n  content: \"\\f006 \\f006 \\f006 \\f006 \\f006\";\n}\n.stars-inner {\n  position: absolute;\n  top: 0;\n  left: 0;\n  white-space: nowrap;\n  overflow: hidden;\n  width: 0;\n}\n.stars-inner::before {\ncontent: \"\\f005 \\f005 \\f005 \\f005 \\f005\";\ncolor: #000000;\n}\n.green {\n  background-color: #03ac0e;\n}\n.c-green{\n  color: #03ac0e;\n}\n.fs-60{\n  font-size: 60px;\n}\n.progress-h {\n  height: 5px;\n}\n.mt-20 {\n  margin-top: 20px !important;\n}\n.rating-color {\n  color: #ffc400;\n}\n.btn-outline-green {\n    color: #03ac0e;\n    border-color: #03ac0e;\n}\n.font-size-review{\n  font-size: 1.14286rem;\n}\n.fr-review{\n  font-weight: 400;\n  font-size: 0.857143rem;\n  color: var(--color-text-low,rgba(49,53,59,0.68));\n}\n.title-review{\n  font-size: 1rem;\n  font-weight: 400;\n  text-transform: none;\n  margin-top: 10px;\n  line-height: 22px;\n}\n/* comment display */\n.img {\n  width: 50px;\n  height: 50px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.w-126 {\n  width: 126%;\n}\n.related-topic-card {\n  padding: 20px 0 17px;\n  border-bottom: solid 1px #e0e0e0;\n}\n.topic-info {\n  float: right;\n  text-align: right;\n  font-size: 14px;\n}\n.topic-container {\n  margin-bottom: 16px;\n  display: inline-flex;\n}\n.topic-detail {\n  width: 714px;\n  overflow-wrap: break-word;\n}\n.topic-title {\n  display: inline-block;\n  width: 350px;\n  vertical-align: top;\n  margin-left: 16px;\n}\n\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9583,7 +9960,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Image left */\n.img-left {\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100%;\n  height: 100%\n}\n/* Card Label */\n.bd-rt {\n    border-right: 1px solid #ddd;\n    border-radius: 0px;\n    margin-right: 0.4em;\n}\n.fs-12 {\n    font-size: 12px;\n}\n.rate-info small {\n  font-weight: 400;\n}\n.rate-info {\n    float: left;\n    width: 100%;\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    padding: 40px 23px 20px 23px;\n    z-index: 2;\n}\n.rate-info:before {\n    content: '';\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-image: linear-gradient(rgba(255, 255, 255, 0.02), rgba(44, 44, 47, 47));\n    z-index: -1;\n}\n.cer span {\n    color: #fff;\n    text-transform: uppercase;\n    font-size: 12px;\n    background: rgba(145, 147, 152, 0.7);\n    border-radius: 50px;\n    padding: 5px 13px;\n    float: right;\n    /* margin-right: 24px; */\n    margin-top: 2px;\n}\n.img-block {\n    position: relative;\n    z-index: 1;\n    float: left;\n    width: 100%;\n}\n.img-block h5, .map-box .rate-info > h5 {\n    margin: 0px;\n    color: #fff;\n    font-size: 15px;\n    font-weight: 600;\n    float: left;\n    position: relative;\n    top: 14px;\n    right: 16px;\n}\n.card .img-block span, .map-box .rate-info > span {\n    color: #fff;\n    text-transform: uppercase;\n    font-size: 12px;\n    background: rgba(145, 147, 152, 0.7);\n    border-radius: 50px;\n    padding: 2px 8px;\n    float: right;\n    margin-top: 2px;\n    position: relative;\n    left: 18px;\n    top: 12px;\n}\n.card .img-block span.for-sale, .map-box .rate-info > span.for-sale {\n    background: #fc384a;\n}\n.card .img-block span.for-rent, .map-box .rate-info > span.for-rent {\n    background: #1778F2;\n}\n@media only screen and (max-width: 1366px) {\n.img-block h5, .map-box .rate-info > h5 {\n    margin: 0px;\n    color: #fff;\n    font-size: 15px;\n    font-weight: 600;\n    float: left;\n    position: relative;\n    top: 35px;\n    right: 16px;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* Image left */\n.img-left {\n  -o-object-fit: cover;\n     object-fit: cover;\n  width: 100%;\n  height: 100%\n}\n/* Card Label */\n.bd-rt {\n    border-right: 1px solid #ddd;\n    border-radius: 0px;\n    margin-right: 0.4em;\n}\n.fs-12 {\n    font-size: 12px;\n}\n.rate-info small {\n  font-weight: 400;\n}\n.rate-info {\n    float: left;\n    width: 100%;\n    position: absolute;\n    bottom: 0;\n    left: 0;\n    padding: 40px 23px 20px 23px;\n    z-index: 2;\n}\n.rate-info:before {\n    content: '';\n    position: absolute;\n    top: 0;\n    left: 0;\n    width: 100%;\n    height: 100%;\n    background-image: linear-gradient(rgba(255, 255, 255, 0.02), rgba(44, 44, 47, 47));\n    z-index: -1;\n}\n.cer span {\n    color: #fff;\n    text-transform: uppercase;\n    font-size: 12px;\n    background: rgba(145, 147, 152, 0.7);\n    border-radius: 50px;\n    padding: 5px 13px;\n    float: right;\n    /* margin-right: 24px; */\n    margin-top: 2px;\n}\n.img-block {\n    position: relative;\n    z-index: 1;\n    float: left;\n    width: 100%;\n}\n.img-block h5, .map-box .rate-info > h5 {\n    margin: 0px;\n    color: #fff;\n    font-size: 15px;\n    font-weight: 600;\n    float: left;\n    position: relative;\n    top: 14px;\n    right: 16px;\n}\n.card .img-block span, .map-box .rate-info > span {\n    color: #fff;\n    text-transform: uppercase;\n    font-size: 12px;\n    background: rgba(145, 147, 152, 0.7);\n    border-radius: 50px;\n    padding: 2px 8px;\n    float: right;\n    margin-top: 2px;\n    position: relative;\n    left: 18px;\n    top: 12px;\n}\n.card .img-block span.for-sale, .map-box .rate-info > span.for-sale {\n    background: #fc384a;\n}\n.card .img-block span.for-rent, .map-box .rate-info > span.for-rent {\n    background: #1778F2;\n}\n@media only screen and (max-width: 1366px) {\n.img-block h5, .map-box .rate-info > h5 {\n    margin: 0px;\n    color: #fff;\n    font-size: 15px;\n    font-weight: 600;\n    float: left;\n    position: relative;\n    top: 35px;\n    right: 16px;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9751,7 +10128,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.file-btn {\n    position: relative;\n    overflow: hidden;\n    cursor: pointer;\n    text-align: center;\n    margin: 0 auto;\n    left: 21%;\n}\n.fileupload {\n    cursor: pointer;\n    position: absolute;\n    font-size: 50px;\n    opacity: 0;\n    right: 0;\n    top: 0;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.file-btn {\n    position: relative;\n    overflow: hidden;\n    cursor: pointer;\n    text-align: center;\n    margin: 0 auto;\n}\n.fileupload {\n    cursor: pointer;\n    position: absolute;\n    font-size: 50px;\n    opacity: 0;\n    right: 0;\n    top: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -9775,7 +10152,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.file-btn {\n    position: relative;\n    overflow: hidden;\n    cursor: pointer;\n    text-align: center;\n    margin: 0 auto;\n    left: 21%;\n}\n.fileupload {\n    cursor: pointer;\n    position: absolute;\n    font-size: 50px;\n    opacity: 0;\n    right: 0;\n    top: 0;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.file-btn {\n    position: relative;\n    overflow: hidden;\n    cursor: pointer;\n    text-align: center;\n    margin: 0 auto;\n}\n.fileupload {\n    cursor: pointer;\n    position: absolute;\n    font-size: 50px;\n    opacity: 0;\n    right: 0;\n    top: 0;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -65345,18 +65722,52 @@ var render = function() {
       _vm._v(" "),
       _c("section", { staticClass: "px-0 py-3" }, [
         _c("div", { staticClass: "container" }, [
-          _c("div", { staticClass: "image-left-radius big-img-desktop" }, [
-            _c("div", { staticClass: "smooth-image-wrapper" }, [
-              _c("img", {
-                staticClass: "smooth-image img-visible img-fluid",
-                staticStyle: { "object-fit": "cover" },
-                attrs: {
-                  src: _vm.storage + "/kosts/" + _vm.kost.image,
-                  alt: "kos"
-                }
-              })
-            ])
-          ])
+          _c(
+            "div",
+            {
+              staticClass: "carousel slide",
+              attrs: { id: "cardImageCarousel", "data-ride": "carousel" }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "carousel-inner" },
+                _vm._l(_vm.kost.image.split(","), function(img, i) {
+                  return _c(
+                    "div",
+                    {
+                      key: i,
+                      staticClass: "carousel-item",
+                      class: [i == 0 ? "active" : ""]
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "image-left-radius big-img-desktop" },
+                        [
+                          _c("div", { staticClass: "smooth-image-wrapper" }, [
+                            _c("img", {
+                              staticClass: "smooth-image img-visible img-fluid",
+                              staticStyle: { "object-fit": "cover" },
+                              attrs: {
+                                src: _vm.storage + "/kosts/" + img,
+                                alt: "kos"
+                              }
+                            })
+                          ])
+                        ]
+                      )
+                    ]
+                  )
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1)
+            ]
+          )
         ])
       ]),
       _vm._v(" "),
@@ -65638,7 +66049,7 @@ var render = function() {
                                 )
                               ]),
                               _vm._v(" "),
-                              _vm._m(0),
+                              _vm._m(2),
                               _vm._v(" "),
                               _c("div", { staticClass: "col-md-7 pl-0" }, [
                                 _c(
@@ -65712,7 +66123,7 @@ var render = function() {
                     "section",
                     [
                       _c("h2", { staticClass: "font-size-review" }, [
-                        _vm._v("Kos Exclusive Nyaman")
+                        _vm._v(_vm._s(_vm.kost.name))
                       ]),
                       _vm._v(" "),
                       _c("h2", { staticClass: "fr-review text-muted mb-4" }, [
@@ -65986,13 +66397,47 @@ var render = function() {
               },
               [
                 _c("div", { staticClass: "card-body" }, [
-                  _c("h5", { staticClass: "card-title mt-0 fs-18 mb-1 pb-1" }, [
-                    _vm._v(
-                      "Rp." +
-                        _vm._s(_vm.formatNumber(_vm.kost.price)) +
-                        " / bulan"
-                    )
-                  ]),
+                  _vm.kost.price_day
+                    ? _c(
+                        "h5",
+                        { staticClass: "card-title mt-0 fs-16 mb-0 pb-1" },
+                        [
+                          _vm._v(
+                            "\n            Rp." +
+                              _vm._s(_vm.formatNumber(_vm.kost.price_day)) +
+                              " / hari\n          "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.kost.price_month
+                    ? _c(
+                        "h5",
+                        { staticClass: "card-title mt-0 fs-16 mb-0 pb-1" },
+                        [
+                          _vm._v(
+                            "\n            Rp." +
+                              _vm._s(_vm.formatNumber(_vm.kost.price_month)) +
+                              " / bulan\n          "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.kost.price_year
+                    ? _c(
+                        "h5",
+                        { staticClass: "card-title mt-0 fs-16 mb-0 pb-1" },
+                        [
+                          _vm._v(
+                            "\n            Rp." +
+                              _vm._s(_vm.formatNumber(_vm.kost.price_year)) +
+                              " / tahun\n          "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("hr"),
                   _vm._v(" "),
@@ -66056,6 +66501,54 @@ var render = function() {
   )
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "carousel-control-prev",
+        attrs: {
+          href: "#cardImageCarousel",
+          role: "button",
+          "data-slide": "prev"
+        }
+      },
+      [
+        _c("span", {
+          staticClass: "carousel-control-prev-icon",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "carousel-control-next",
+        attrs: {
+          href: "#cardImageCarousel",
+          role: "button",
+          "data-slide": "next"
+        }
+      },
+      [
+        _c("span", {
+          staticClass: "carousel-control-next-icon",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+      ]
+    )
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -66131,10 +66624,82 @@ var render = function() {
             }
           },
           [
-            _c("img", {
-              staticClass: "img-fit img-left",
-              attrs: { src: _vm.storage + "/kosts/" + _vm.image, alt: "kos" }
-            })
+            _c(
+              "div",
+              {
+                staticClass: "carousel slide h-100",
+                attrs: {
+                  id: "cardImageCarousel" + _vm.id,
+                  "data-ride": "carousel"
+                }
+              },
+              [
+                _c(
+                  "div",
+                  { staticClass: "carousel-inner h-100" },
+                  _vm._l(_vm.image.split(","), function(img, i) {
+                    return _c(
+                      "div",
+                      {
+                        key: i,
+                        staticClass: "carousel-item h-100",
+                        class: [i == 0 ? "active" : ""]
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "img-fit img-left",
+                          attrs: {
+                            src: _vm.storage + "/kosts/" + img,
+                            alt: "kos"
+                          }
+                        })
+                      ]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "carousel-control-prev",
+                    attrs: {
+                      href: "#cardImageCarousel" + _vm.id,
+                      role: "button",
+                      "data-slide": "prev"
+                    }
+                  },
+                  [
+                    _c("span", {
+                      staticClass: "carousel-control-prev-icon",
+                      attrs: { "aria-hidden": "true" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "carousel-control-next",
+                    attrs: {
+                      href: "#cardImageCarousel" + _vm.id,
+                      role: "button",
+                      "data-slide": "next"
+                    }
+                  },
+                  [
+                    _c("span", {
+                      staticClass: "carousel-control-next-icon",
+                      attrs: { "aria-hidden": "true" }
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+                  ]
+                )
+              ]
+            )
           ]
         )
       ]),
@@ -66167,10 +66732,35 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _c("p", { staticClass: "fw-500 fs-16 text-dark mb-1" }, [
-              _vm._v("Rp." + _vm._s(_vm.formatNumber(_vm.price))),
-              _c("small", { staticClass: "fs-14" }, [_vm._v(" / bulan")])
-            ]),
+            _vm.price_day
+              ? _c("p", { staticClass: "fw-500 fs-16 text-dark mb-1" }, [
+                  _vm._v(
+                    "\n            Rp." +
+                      _vm._s(_vm.formatNumber(_vm.price_day))
+                  ),
+                  _c("small", { staticClass: "fs-14" }, [_vm._v(" / hari")])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.price_month
+              ? _c("p", { staticClass: "fw-500 fs-16 text-dark mb-1" }, [
+                  _vm._v(
+                    "\n            Rp." +
+                      _vm._s(_vm.formatNumber(_vm.price_month))
+                  ),
+                  _c("small", { staticClass: "fs-14" }, [_vm._v(" / bulan")])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.price_year
+              ? _c("p", { staticClass: "fw-500 fs-16 text-dark mb-1" }, [
+                  _vm._v(
+                    "\n            Rp." +
+                      _vm._s(_vm.formatNumber(_vm.price_year))
+                  ),
+                  _c("small", { staticClass: "fs-14" }, [_vm._v(" / tahun")])
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c(
               "p",
@@ -66610,10 +67200,13 @@ var render = function() {
                 [
                   _c("app-card", {
                     attrs: {
+                      id: m.id,
                       home: _vm.home,
                       slug: m.slug,
                       user_id: m.user_id,
-                      price: m.price,
+                      price_day: m.price_day,
+                      price_month: m.price_month,
+                      price_year: m.price_year,
                       name: m.name,
                       image: m.image,
                       score: m.score,
@@ -66628,7 +67221,17 @@ var render = function() {
               )
             }),
             0
-          )
+          ),
+          _vm._v(" "),
+          _vm.circle_markers && _vm.circle_markers.length < 1
+            ? _c("div", { staticClass: "text-center py-5 text-muted" }, [
+                _c("i", { staticClass: "fad fa-boxes-alt fa-4x" }),
+                _vm._v(" "),
+                _c("p", { staticClass: "mt-2 mb-0" }, [
+                  _vm._v("Tidak ada data")
+                ])
+              ])
+            : _vm._e()
         ],
         1
       )
@@ -66752,14 +67355,87 @@ var render = function() {
                       staticClass: "card shadow-card bor-rad-top-10 mt-2 mb-2"
                     },
                     [
-                      _c("img", {
-                        staticClass:
-                          "card-img-top bor-rad-top-10 img-fit kost-img",
-                        attrs: {
-                          src: _vm.storage + "/kosts/" + kost.image,
-                          alt: "Card image cap"
-                        }
-                      }),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "carousel slide",
+                          attrs: {
+                            id: "cardImageCarousel" + kost.id,
+                            "data-ride": "carousel"
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "carousel-inner" },
+                            _vm._l(kost.image.split(","), function(img, i) {
+                              return _c(
+                                "div",
+                                {
+                                  key: i,
+                                  staticClass: "carousel-item",
+                                  class: [i == 0 ? "active" : ""]
+                                },
+                                [
+                                  _c("img", {
+                                    staticClass:
+                                      "card-img-top bor-rad-top-10 img-fit kost-img",
+                                    attrs: {
+                                      src: _vm.storage + "/kosts/" + img,
+                                      alt: "Card image cap"
+                                    }
+                                  })
+                                ]
+                              )
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "carousel-control-prev",
+                              attrs: {
+                                href: "#cardImageCarousel" + kost.id,
+                                role: "button",
+                                "data-slide": "prev"
+                              }
+                            },
+                            [
+                              _c("span", {
+                                staticClass: "carousel-control-prev-icon",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "sr-only" }, [
+                                _vm._v("Previous")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "carousel-control-next",
+                              attrs: {
+                                href: "#cardImageCarousel" + kost.id,
+                                role: "button",
+                                "data-slide": "next"
+                              }
+                            },
+                            [
+                              _c("span", {
+                                staticClass: "carousel-control-next-icon",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "sr-only" }, [
+                                _vm._v("Next")
+                              ])
+                            ]
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-body" }, [
                         _c(
@@ -66793,22 +67469,50 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c("p", { staticClass: "fs-16" }, [
-                          _vm._v(
-                            "\n            Rp." +
-                              _vm._s(_vm.formatNumber(kost.price)) +
-                              "\n              "
-                          ),
-                          _c("small", { staticClass: "fs-14" }, [
-                            _vm._v("/ bulan")
-                          ])
-                        ]),
+                        kost.price_day
+                          ? _c("p", { staticClass: "fs-16 mb-0" }, [
+                              _vm._v(
+                                "\n              Rp." +
+                                  _vm._s(_vm.formatNumber(kost.price_day)) +
+                                  "\n              "
+                              ),
+                              _c("small", { staticClass: "fs-14" }, [
+                                _vm._v("/ hari")
+                              ])
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        kost.price_month
+                          ? _c("p", { staticClass: "fs-16 mb-0" }, [
+                              _vm._v(
+                                "\n              Rp." +
+                                  _vm._s(_vm.formatNumber(kost.price_month)) +
+                                  "\n              "
+                              ),
+                              _c("small", { staticClass: "fs-14" }, [
+                                _vm._v("/ bulan")
+                              ])
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        kost.price_year
+                          ? _c("p", { staticClass: "fs-16 mb-0" }, [
+                              _vm._v(
+                                "\n              Rp." +
+                                  _vm._s(_vm.formatNumber(kost.price_year)) +
+                                  "\n              "
+                              ),
+                              _c("small", { staticClass: "fs-14" }, [
+                                _vm._v("/ tahun")
+                              ])
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
                         _c(
                           "p",
                           {
                             staticClass:
-                              "card-text fs-12 text-secondary text-truncate"
+                              "card-text fs-12 text-secondary text-truncate mt-3"
                           },
                           [
                             _c("i", { staticClass: "fal fa-map-marker-alt" }),
@@ -66936,14 +67640,87 @@ var render = function() {
                       staticClass: "card shadow-card bor-rad-top-10 mt-2 mb-2"
                     },
                     [
-                      _c("img", {
-                        staticClass:
-                          "card-img-top bor-rad-top-10 img-fit kost-img",
-                        attrs: {
-                          src: _vm.storage + "/kosts/" + kost.image,
-                          alt: "Card image cap"
-                        }
-                      }),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "carousel slide",
+                          attrs: {
+                            id: "imageCarousel" + kost.id,
+                            "data-ride": "carousel"
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            { staticClass: "carousel-inner" },
+                            _vm._l(kost.image.split(","), function(img, i) {
+                              return _c(
+                                "div",
+                                {
+                                  key: i,
+                                  staticClass: "carousel-item",
+                                  class: [i == 0 ? "active" : ""]
+                                },
+                                [
+                                  _c("img", {
+                                    staticClass:
+                                      "card-img-top bor-rad-top-10 img-fit kost-img",
+                                    attrs: {
+                                      src: _vm.storage + "/kosts/" + img,
+                                      alt: "Card image cap"
+                                    }
+                                  })
+                                ]
+                              )
+                            }),
+                            0
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "carousel-control-prev",
+                              attrs: {
+                                href: "#imageCarousel" + kost.id,
+                                role: "button",
+                                "data-slide": "prev"
+                              }
+                            },
+                            [
+                              _c("span", {
+                                staticClass: "carousel-control-prev-icon",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "sr-only" }, [
+                                _vm._v("Previous")
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "a",
+                            {
+                              staticClass: "carousel-control-next",
+                              attrs: {
+                                href: "#imageCarousel" + kost.id,
+                                role: "button",
+                                "data-slide": "next"
+                              }
+                            },
+                            [
+                              _c("span", {
+                                staticClass: "carousel-control-next-icon",
+                                attrs: { "aria-hidden": "true" }
+                              }),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "sr-only" }, [
+                                _vm._v("Next")
+                              ])
+                            ]
+                          )
+                        ]
+                      ),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-body" }, [
                         _c(
@@ -66977,22 +67754,50 @@ var render = function() {
                           ]
                         ),
                         _vm._v(" "),
-                        _c("p", { staticClass: "fs-16" }, [
-                          _vm._v(
-                            "\n            Rp." +
-                              _vm._s(_vm.formatNumber(kost.price)) +
-                              "\n              "
-                          ),
-                          _c("small", { staticClass: "fs-14" }, [
-                            _vm._v("/ bulan")
-                          ])
-                        ]),
+                        kost.price_day
+                          ? _c("p", { staticClass: "fs-16 mb-0" }, [
+                              _vm._v(
+                                "\n              Rp." +
+                                  _vm._s(_vm.formatNumber(kost.price_day)) +
+                                  "\n              "
+                              ),
+                              _c("small", { staticClass: "fs-14" }, [
+                                _vm._v("/ hari")
+                              ])
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        kost.price_month
+                          ? _c("p", { staticClass: "fs-16 mb-0" }, [
+                              _vm._v(
+                                "\n              Rp." +
+                                  _vm._s(_vm.formatNumber(kost.price_month)) +
+                                  "\n              "
+                              ),
+                              _c("small", { staticClass: "fs-14" }, [
+                                _vm._v("/ bulan")
+                              ])
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        kost.price_year
+                          ? _c("p", { staticClass: "fs-16 mb-0" }, [
+                              _vm._v(
+                                "\n              Rp." +
+                                  _vm._s(_vm.formatNumber(kost.price_year)) +
+                                  "\n              "
+                              ),
+                              _c("small", { staticClass: "fs-14" }, [
+                                _vm._v("/ tahun")
+                              ])
+                            ])
+                          : _vm._e(),
                         _vm._v(" "),
                         _c(
                           "p",
                           {
                             staticClass:
-                              "card-text fs-12 text-secondary text-truncate"
+                              "card-text fs-12 text-secondary text-truncate mt-3"
                           },
                           [
                             _c("i", { staticClass: "fal fa-map-marker-alt" }),
@@ -67074,7 +67879,11 @@ var render = function() {
               }),
               0
             )
-          : _vm._e()
+          : _c("div", { staticClass: "text-center py-5 text-muted" }, [
+              _c("i", { staticClass: "fad fa-boxes-alt fa-4x" }),
+              _vm._v(" "),
+              _c("p", { staticClass: "mt-2 mb-0" }, [_vm._v("Tidak ada data")])
+            ])
       ])
     ]),
     _vm._v(" "),
@@ -67764,6 +68573,66 @@ var render = function() {
                                 _vm._v(
                                   "\n                      " +
                                     _vm._s(_vm.errors_2.address[0]) +
+                                    "\n                    "
+                                )
+                              ])
+                            : _vm._e()
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group row" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass:
+                              "col-md-4 col-form-label text-md-right",
+                            attrs: { for: "izin_bangunan" }
+                          },
+                          [_vm._v("Izin Bangunan")]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-6" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.register_kost.izin_bangunan,
+                                expression: "register_kost.izin_bangunan"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            class: [
+                              _vm.errors_2.izin_bangunan ? "is-invalid" : ""
+                            ],
+                            attrs: {
+                              id: "izin_bangunan",
+                              type: "text",
+                              name: "izin_bangunan",
+                              required: ""
+                            },
+                            domProps: {
+                              value: _vm.register_kost.izin_bangunan
+                            },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.register_kost,
+                                  "izin_bangunan",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm.errors_2.izin_bangunan
+                            ? _c("small", { staticClass: "text-danger" }, [
+                                _vm._v(
+                                  "\n                      " +
+                                    _vm._s(_vm.errors_2.izin_bangunan[0]) +
                                     "\n                    "
                                 )
                               ])
@@ -68468,6 +69337,20 @@ var render = function() {
                                       },
                                       [_vm._v(_vm._s(user.address))]
                                     )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("tr", [
+                                    _c("td", [_vm._v("No. Izin Bangunan")]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(":")]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "td",
+                                      {
+                                        staticStyle: { "white-space": "normal" }
+                                      },
+                                      [_vm._v(_vm._s(user.izin_bangunan))]
+                                    )
                                   ])
                                 ]
                               ),
@@ -68685,6 +69568,20 @@ var render = function() {
                                       },
                                       [_vm._v(_vm._s(user.address))]
                                     )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("tr", [
+                                    _c("td", [_vm._v("No. Izin Bangunan")]),
+                                    _vm._v(" "),
+                                    _c("td", [_vm._v(":")]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "td",
+                                      {
+                                        staticStyle: { "white-space": "normal" }
+                                      },
+                                      [_vm._v(_vm._s(user.izin_bangunan))]
+                                    )
                                   ])
                                 ]
                               ),
@@ -68854,39 +69751,79 @@ var render = function() {
           _c("div", { staticClass: "col-sm-12 col-md-12 col-lg-12" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "form-row" }, [
-                _c("div", { staticClass: "form-group col-md-2 col-sm-8" }, [
+                _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Foto Kos")]),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass:
-                      "card-img-top img-fit upload-img p-t-4 p-r-4 p-b-4 p-l-4 border",
-                    attrs: {
-                      id: "image-preview",
-                      alt: "Card image cap",
-                      src: _vm.url_image
-                        ? _vm.url_image
-                        : "https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png"
-                    }
-                  }),
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "file-btn btn btn-sm button border mt-2" },
-                    [
-                      _vm._v("\n                Upload\n                "),
-                      _c("input", {
-                        staticClass: "fileupload",
-                        attrs: {
-                          type: "file",
-                          name: "file",
-                          accept: "image/*"
-                        },
-                        on: { change: _vm.changeKost }
-                      })
-                    ]
+                    { staticClass: "row" },
+                    _vm._l(3, function(i) {
+                      return _c("div", { key: i - 1, staticClass: "col" }, [
+                        _c("img", {
+                          staticClass:
+                            "card-img-top img-fit upload-img p-t-4 p-r-4 p-b-4 p-l-4 border",
+                          attrs: {
+                            id: "image-preview",
+                            alt: "Card image cap",
+                            src: _vm.url_image[i - 1]
+                              ? _vm.url_image[i - 1]
+                              : "https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "w-100 text-center" }, [
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "file-btn btn btn-sm button border mt-2"
+                            },
+                            [
+                              _vm._v(
+                                "\n                      Upload\n                      "
+                              ),
+                              _c("input", {
+                                staticClass: "fileupload",
+                                attrs: {
+                                  type: "file",
+                                  name: "file[]",
+                                  accept: "image/*"
+                                },
+                                on: {
+                                  change: function(e) {
+                                    return _vm.changeKost(e, i - 1)
+                                  }
+                                }
+                              })
+                            ]
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _vm.errors && _vm.errors["images." + (i - 1)]
+                          ? _c(
+                              "small",
+                              {
+                                staticClass: "text-danger",
+                                staticStyle: { "white-space": "nowrap" }
+                              },
+                              [
+                                _vm._v(
+                                  "\n                    " +
+                                    _vm._s(
+                                      _vm.errors &&
+                                        _vm.errors["images." + (i - 1)][0]
+                                    ) +
+                                    "\n                  "
+                                )
+                              ]
+                            )
+                          : _vm._e()
+                      ])
+                    }),
+                    0
                   ),
                   _vm._v(" "),
-                  _vm.errors.image
+                  _vm.errors && _vm.errors.images
                     ? _c(
                         "small",
                         {
@@ -68896,7 +69833,11 @@ var render = function() {
                         [
                           _vm._v(
                             "\n                " +
-                              _vm._s(_vm.errors.image[0]) +
+                              _vm._s(
+                                _vm.errors &&
+                                  _vm.errors.images &&
+                                  _vm.errors.images[0]
+                              ) +
                               "\n              "
                           )
                         ]
@@ -68940,7 +69881,7 @@ var render = function() {
                     : _vm._e()
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group col-md-4 col-sm-4" }, [
+                _c("div", { staticClass: "form-group col-md-6 col-sm-6" }, [
                   _c("label", [_vm._v("Kategori")]),
                   _vm._v(" "),
                   _c(
@@ -68980,12 +69921,16 @@ var render = function() {
                         _vm._v("Please select one")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "mahasiswa" } }, [
-                        _vm._v("Mahasiswa")
-                      ]),
-                      _vm._v(" "),
                       _c("option", { attrs: { value: "umum" } }, [
                         _vm._v("Umum")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "perempuan" } }, [
+                        _vm._v("Perempuan")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "laki-laki" } }, [
+                        _vm._v("Laki-laki")
                       ])
                     ]
                   ),
@@ -69001,7 +69946,7 @@ var render = function() {
                     : _vm._e()
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group col-md-4 col-sm-4" }, [
+                _c("div", { staticClass: "form-group col-md-6 col-sm-6" }, [
                   _c("label", [_vm._v("Jumlah Kamar")]),
                   _vm._v(" "),
                   _c("input", {
@@ -69052,29 +69997,121 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.add_kost.price,
-                          expression: "add_kost.price"
+                          value: _vm.add_kost.price_day,
+                          expression: "add_kost.price_day"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "number", placeholder: "Harga Kos" },
-                      domProps: { value: _vm.add_kost.price },
+                      domProps: { value: _vm.add_kost.price_day },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.add_kost, "price", $event.target.value)
+                          _vm.$set(
+                            _vm.add_kost,
+                            "price_day",
+                            $event.target.value
+                          )
                         }
                       }
                     })
                   ]),
                   _vm._v(" "),
-                  _vm.errors.price
+                  _vm.errors.price_day
                     ? _c("small", { staticClass: "text-danger" }, [
                         _vm._v(
                           "\n                " +
-                            _vm._s(_vm.errors.price[0]) +
+                            _vm._s(_vm.errors.price_day[0]) +
+                            "\n              "
+                        )
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-md-4 col-sm-4" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.add_kost.price_month,
+                          expression: "add_kost.price_month"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number", placeholder: "Harga Kos" },
+                      domProps: { value: _vm.add_kost.price_month },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.add_kost,
+                            "price_month",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm.errors.price_month
+                    ? _c("small", { staticClass: "text-danger" }, [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.errors.price_month[0]) +
+                            "\n              "
+                        )
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-md-4 col-sm-4" }, [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.add_kost.price_year,
+                          expression: "add_kost.price_year"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number", placeholder: "Harga Kos" },
+                      domProps: { value: _vm.add_kost.price_year },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.add_kost,
+                            "price_year",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm.errors.price_year
+                    ? _c("small", { staticClass: "text-danger" }, [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.errors.price_year[0]) +
                             "\n              "
                         )
                       ])
@@ -69132,7 +70169,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(3)
+                    _vm._m(7)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -69179,7 +70216,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(4)
+                    _vm._m(8)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -69226,7 +70263,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(5)
+                    _vm._m(9)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -69273,7 +70310,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(6)
+                    _vm._m(10)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -69320,7 +70357,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(7)
+                    _vm._m(11)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -69367,7 +70404,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(8)
+                    _vm._m(12)
                   ]),
                   _vm._v(" "),
                   _c("br"),
@@ -69552,6 +70589,7 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-green float-right mb-3",
+                  attrs: { disabled: _vm.saveDisabled },
                   on: { click: _vm.addKost }
                 },
                 [_vm._v("\n            Simpan\n          ")]
@@ -69561,7 +70599,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(9)
+      _vm._m(13)
     ],
     1
   )
@@ -69585,7 +70623,43 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("label", [_vm._v("Harga Kos "), _c("small", [_vm._v("/hari")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_vm._v("Rp")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("label", [_vm._v("Harga Kos "), _c("small", [_vm._v("/bulan")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_vm._v("Rp")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [_vm._v("Harga Kos "), _c("small", [_vm._v("/tahun")])])
   },
   function() {
     var _vm = this
@@ -69788,39 +70862,176 @@ var render = function() {
           _c("div", { staticClass: "col-sm-12 col-md-12 col-lg-12" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("div", { staticClass: "form-row" }, [
-                _c("div", { staticClass: "form-group col-md-2 col-sm-8" }, [
+                _c("div", { staticClass: "form-group" }, [
                   _c("label", [_vm._v("Foto Kos")]),
-                  _vm._v(" "),
-                  _c("img", {
-                    staticClass:
-                      "card-img-top img-fit upload-img p-t-4 p-r-4 p-b-4 p-l-4 border",
-                    attrs: {
-                      id: "image-preview",
-                      alt: "Card image cap",
-                      src: _vm.url_image
-                        ? _vm.url_image
-                        : _vm.storage + "/" + _vm.update_kost.image
-                    }
-                  }),
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "file-btn btn btn-sm button border mt-2" },
+                    { staticClass: "row" },
                     [
-                      _vm._v("\n                Upload\n                "),
-                      _c("input", {
-                        staticClass: "fileupload",
-                        attrs: {
-                          type: "file",
-                          name: "file",
-                          accept: "image/*"
-                        },
-                        on: { change: _vm.changeKost }
+                      _vm._l(_vm.update_kost.image, function(img, i) {
+                        return _vm.update_kost.image.length
+                          ? _c(
+                              "div",
+                              { key: i, staticClass: "col col-lg-4 col-sm-12" },
+                              [
+                                _c("img", {
+                                  staticClass:
+                                    "card-img-top img-fit upload-img p-t-4 p-r-4 p-b-4 p-l-4 border",
+                                  attrs: {
+                                    id: "image-preview",
+                                    alt: "Card image cap",
+                                    src:
+                                      _vm.url_image &&
+                                      _vm.url_image.length &&
+                                      _vm.url_image[i].indexOf("blob:") !== -1
+                                        ? _vm.url_image[i]
+                                        : _vm.storage + "/" + img
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "w-100 text-center" },
+                                  [
+                                    _c(
+                                      "div",
+                                      {
+                                        staticClass:
+                                          "file-btn btn btn-sm button border mt-2"
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                      Upload\n                      "
+                                        ),
+                                        _c("input", {
+                                          staticClass: "fileupload",
+                                          attrs: {
+                                            type: "file",
+                                            name: "file[]",
+                                            accept: "image/*"
+                                          },
+                                          on: {
+                                            change: function(e) {
+                                              return _vm.changeKost(e, i)
+                                            }
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _vm.errors && _vm.errors["images." + (i - 1)]
+                                  ? _c(
+                                      "small",
+                                      {
+                                        staticClass: "text-danger",
+                                        staticStyle: { "white-space": "nowrap" }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "\n                    " +
+                                            _vm._s(
+                                              _vm.errors &&
+                                                _vm.errors[
+                                                  "images." + (i - 1)
+                                                ][0]
+                                            ) +
+                                            "\n                  "
+                                        )
+                                      ]
+                                    )
+                                  : _vm._e()
+                              ]
+                            )
+                          : _vm._e()
+                      }),
+                      _vm._v(" "),
+                      _vm._l(3 - _vm.update_kost.image.length, function(i) {
+                        return _c(
+                          "div",
+                          { key: i + 1, staticClass: "col col-lg-4 col-sm-12" },
+                          [
+                            _c("img", {
+                              staticClass:
+                                "card-img-top img-fit upload-img p-t-4 p-r-4 p-b-4 p-l-4 border",
+                              attrs: {
+                                id: "image-preview",
+                                alt: "Card image cap",
+                                src: _vm.url_image[
+                                  _vm.update_kost.image.length + 1 - 1
+                                ]
+                                  ? _vm.url_image[
+                                      _vm.update_kost.image.length + 1 - 1
+                                    ]
+                                  : "https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "w-100 text-center" }, [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "file-btn btn btn-sm button border mt-2"
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                      Upload\n                      "
+                                  ),
+                                  _c("input", {
+                                    staticClass: "fileupload",
+                                    attrs: {
+                                      type: "file",
+                                      name: "file[]",
+                                      accept: "image/*"
+                                    },
+                                    on: {
+                                      change: function(e) {
+                                        return _vm.changeKost(
+                                          e,
+                                          _vm.update_kost.image.length + 1 - 1
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _vm.errors && _vm.errors["images." + (i - 1)]
+                              ? _c(
+                                  "small",
+                                  {
+                                    staticClass: "text-danger",
+                                    staticStyle: { "white-space": "nowrap" }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                    " +
+                                        _vm._s(
+                                          _vm.errors &&
+                                            _vm.errors[
+                                              "images." +
+                                                (_vm.update_kost.image.length +
+                                                  1 -
+                                                  1)
+                                            ][0]
+                                        ) +
+                                        "\n                  "
+                                    )
+                                  ]
+                                )
+                              : _vm._e()
+                          ]
+                        )
                       })
-                    ]
+                    ],
+                    2
                   ),
                   _vm._v(" "),
-                  _vm.errors.image
+                  _vm.errors.images
                     ? _c(
                         "small",
                         {
@@ -69830,7 +71041,11 @@ var render = function() {
                         [
                           _vm._v(
                             "\n                " +
-                              _vm._s(_vm.errors.image[0]) +
+                              _vm._s(
+                                _vm.errors &&
+                                  _vm.errors.images &&
+                                  _vm.errors.images[0]
+                              ) +
                               "\n              "
                           )
                         ]
@@ -69874,7 +71089,7 @@ var render = function() {
                     : _vm._e()
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group col-md-4 col-sm-4" }, [
+                _c("div", { staticClass: "form-group col-md-6 col-sm-6" }, [
                   _c("label", [_vm._v("Kategori")]),
                   _vm._v(" "),
                   _c(
@@ -69914,12 +71129,16 @@ var render = function() {
                         _vm._v("Please select one")
                       ]),
                       _vm._v(" "),
-                      _c("option", { attrs: { value: "mahasiswa" } }, [
-                        _vm._v("Mahasiswa")
-                      ]),
-                      _vm._v(" "),
                       _c("option", { attrs: { value: "umum" } }, [
                         _vm._v("Umum")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "perempuan" } }, [
+                        _vm._v("Perempuan")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "laki-laki" } }, [
+                        _vm._v("Laki-laki")
                       ])
                     ]
                   ),
@@ -69935,7 +71154,7 @@ var render = function() {
                     : _vm._e()
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group col-md-4 col-sm-4" }, [
+                _c("div", { staticClass: "form-group col-md-6 col-sm-6" }, [
                   _c("label", [_vm._v("Jumlah Kamar")]),
                   _vm._v(" "),
                   _c("input", {
@@ -69986,13 +71205,13 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.update_kost.price,
-                          expression: "update_kost.price"
+                          value: _vm.update_kost.price_day,
+                          expression: "update_kost.price_day"
                         }
                       ],
                       staticClass: "form-control",
                       attrs: { type: "number", placeholder: "Harga Kos" },
-                      domProps: { value: _vm.update_kost.price },
+                      domProps: { value: _vm.update_kost.price_day },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
@@ -70000,7 +71219,7 @@ var render = function() {
                           }
                           _vm.$set(
                             _vm.update_kost,
-                            "price",
+                            "price_day",
                             $event.target.value
                           )
                         }
@@ -70008,11 +71227,99 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _vm.errors.price
+                  _vm.errors.price_day
                     ? _c("small", { staticClass: "text-danger" }, [
                         _vm._v(
                           "\n                " +
-                            _vm._s(_vm.errors.price[0]) +
+                            _vm._s(_vm.errors.price_day[0]) +
+                            "\n              "
+                        )
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-md-4 col-sm-4" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _vm._m(4),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.update_kost.price_month,
+                          expression: "update_kost.price_month"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number", placeholder: "Harga Kos" },
+                      domProps: { value: _vm.update_kost.price_month },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.update_kost,
+                            "price_month",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm.errors.price_month
+                    ? _c("small", { staticClass: "text-danger" }, [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.errors.price_month[0]) +
+                            "\n              "
+                        )
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group col-md-4 col-sm-4" }, [
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "input-group" }, [
+                    _vm._m(6),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.update_kost.price_year,
+                          expression: "update_kost.price_year"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { type: "number", placeholder: "Harga Kos" },
+                      domProps: { value: _vm.update_kost.price_year },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.update_kost,
+                            "price_year",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm.errors.price_year
+                    ? _c("small", { staticClass: "text-danger" }, [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.errors.price_year[0]) +
                             "\n              "
                         )
                       ])
@@ -70070,7 +71377,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(3)
+                    _vm._m(7)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -70117,7 +71424,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(4)
+                    _vm._m(8)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -70164,7 +71471,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(5)
+                    _vm._m(9)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -70211,7 +71518,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(6)
+                    _vm._m(10)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -70258,7 +71565,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(7)
+                    _vm._m(11)
                   ]),
                   _vm._v(" "),
                   _c("div", { staticClass: "form-check form-check-inline" }, [
@@ -70305,7 +71612,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(8)
+                    _vm._m(12)
                   ]),
                   _vm._v(" "),
                   _c("br"),
@@ -70494,6 +71801,7 @@ var render = function() {
                 "button",
                 {
                   staticClass: "btn btn-green float-right mb-3",
+                  attrs: { disabled: _vm.saveDisabled },
                   on: { click: _vm.updateKost }
                 },
                 [_vm._v("\n            Simpan\n          ")]
@@ -70503,7 +71811,7 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _vm._m(9)
+      _vm._m(13)
     ],
     1
   )
@@ -70527,7 +71835,43 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("label", [_vm._v("Harga Kos "), _c("small", [_vm._v("/hari")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_vm._v("Rp")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("label", [_vm._v("Harga Kos "), _c("small", [_vm._v("/bulan")])])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "input-group-prepend" }, [
+      _c(
+        "span",
+        { staticClass: "input-group-text", attrs: { id: "basic-addon1" } },
+        [_vm._v("Rp")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", [_vm._v("Harga Kos "), _c("small", [_vm._v("/tahun")])])
   },
   function() {
     var _vm = this
@@ -70829,14 +72173,90 @@ var render = function() {
                               "card shadow-card bor-rad-top-10 mt-2 mb-2"
                           },
                           [
-                            _c("img", {
-                              staticClass:
-                                "card-img-top bor-rad-top-10 img-fit kost-img",
-                              attrs: {
-                                src: _vm.storage + "/kosts/" + kost.image,
-                                alt: "Card image cap"
-                              }
-                            }),
+                            _c(
+                              "div",
+                              {
+                                staticClass: "carousel slide",
+                                attrs: {
+                                  id: "imageCarousel" + index,
+                                  "data-ride": "carousel"
+                                }
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  { staticClass: "carousel-inner" },
+                                  _vm._l(kost.image.split(","), function(
+                                    img,
+                                    i
+                                  ) {
+                                    return _c(
+                                      "div",
+                                      {
+                                        key: i,
+                                        staticClass: "carousel-item",
+                                        class: [i == 0 ? "active" : ""]
+                                      },
+                                      [
+                                        _c("img", {
+                                          staticClass:
+                                            "card-img-top bor-rad-top-10 img-fit kost-img",
+                                          attrs: {
+                                            src: _vm.storage + "/kosts/" + img,
+                                            alt: "Card image cap"
+                                          }
+                                        })
+                                      ]
+                                    )
+                                  }),
+                                  0
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "carousel-control-prev",
+                                    attrs: {
+                                      href: "#imageCarousel" + index,
+                                      role: "button",
+                                      "data-slide": "prev"
+                                    }
+                                  },
+                                  [
+                                    _c("span", {
+                                      staticClass: "carousel-control-prev-icon",
+                                      attrs: { "aria-hidden": "true" }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "sr-only" }, [
+                                      _vm._v("Previous")
+                                    ])
+                                  ]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "a",
+                                  {
+                                    staticClass: "carousel-control-next",
+                                    attrs: {
+                                      href: "#imageCarousel" + index,
+                                      role: "button",
+                                      "data-slide": "next"
+                                    }
+                                  },
+                                  [
+                                    _c("span", {
+                                      staticClass: "carousel-control-next-icon",
+                                      attrs: { "aria-hidden": "true" }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", { staticClass: "sr-only" }, [
+                                      _vm._v("Next")
+                                    ])
+                                  ]
+                                )
+                              ]
+                            ),
                             _vm._v(" "),
                             _c("div", { staticClass: "card-body" }, [
                               _c(
@@ -70848,22 +72268,56 @@ var render = function() {
                                 [_vm._v(_vm._s(kost.name))]
                               ),
                               _vm._v(" "),
-                              _c("p", { staticClass: "fs-16" }, [
-                                _vm._v(
-                                  "\n                Rp." +
-                                    _vm._s(_vm.formatNumber(kost.price)) +
-                                    "\n                "
-                                ),
-                                _c("small", { staticClass: "fs-14" }, [
-                                  _vm._v("/ bulan")
-                                ])
-                              ]),
+                              kost.price_day
+                                ? _c("p", { staticClass: "fs-16 mb-0" }, [
+                                    _vm._v(
+                                      "\n                Rp." +
+                                        _vm._s(
+                                          _vm.formatNumber(kost.price_day)
+                                        ) +
+                                        "\n                "
+                                    ),
+                                    _c("small", { staticClass: "fs-14" }, [
+                                      _vm._v("/ hari")
+                                    ])
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              kost.price_month
+                                ? _c("p", { staticClass: "fs-16 mb-0" }, [
+                                    _vm._v(
+                                      "\n                Rp." +
+                                        _vm._s(
+                                          _vm.formatNumber(kost.price_month)
+                                        ) +
+                                        "\n                "
+                                    ),
+                                    _c("small", { staticClass: "fs-14" }, [
+                                      _vm._v("/ bulan")
+                                    ])
+                                  ])
+                                : _vm._e(),
+                              _vm._v(" "),
+                              kost.price_year
+                                ? _c("p", { staticClass: "fs-16 mb-0" }, [
+                                    _vm._v(
+                                      "\n                Rp." +
+                                        _vm._s(
+                                          _vm.formatNumber(kost.price_year)
+                                        ) +
+                                        "\n                "
+                                    ),
+                                    _c("small", { staticClass: "fs-14" }, [
+                                      _vm._v("/ tahun")
+                                    ])
+                                  ])
+                                : _vm._e(),
                               _vm._v(" "),
                               _c(
                                 "p",
                                 {
                                   staticClass:
-                                    "card-text fs-12 text-secondary text-truncate"
+                                    "card-text fs-12 text-secondary text-truncate mt-3"
                                 },
                                 [
                                   _c("i", {

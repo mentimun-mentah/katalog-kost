@@ -3,7 +3,25 @@
   <div class="row no-gutters">
     <div class="col-md-4">
       <a :href="home + '/detail-kos/' + slug +'/'+ user_id">
-        <img class="img-fit img-left" :src="storage + '/kosts/' + image" alt="kos">
+        <div :id="'cardImageCarousel'+id" class="carousel slide h-100" data-ride="carousel">
+          <div class="carousel-inner h-100">
+            <div 
+              class="carousel-item h-100" v-for="(img, i) in image.split(',')" :key="i"
+              :class="[i == 0 ? 'active' : '']"
+              >
+                <img class="img-fit img-left" :src="storage + '/kosts/' + img" alt="kos">
+            </div>
+          </div>
+          <a class="carousel-control-prev" :href="'#cardImageCarousel'+id" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" :href="'#cardImageCarousel'+id" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+
       </a>                                       
     </div><!--/col-->
     <div class="col-md-8">
@@ -14,7 +32,15 @@
               {{name}}
             </a>
           </div>
-          <p class="fw-500 fs-16 text-dark mb-1">Rp.{{formatNumber(price)}}<small class="fs-14"> / bulan</small></p>
+          <p class="fw-500 fs-16 text-dark mb-1" v-if="price_day">
+            Rp.{{formatNumber(price_day)}}<small class="fs-14"> / hari</small>
+          </p>
+          <p class="fw-500 fs-16 text-dark mb-1" v-if="price_month">
+            Rp.{{formatNumber(price_month)}}<small class="fs-14"> / bulan</small>
+          </p>
+          <p class="fw-500 fs-16 text-dark mb-1" v-if="price_year">
+            Rp.{{formatNumber(price_year)}}<small class="fs-14"> / tahun</small>
+          </p>
           <p class="fs-12 text-secondary card-text text-truncate"><i class="fal fa-map-marker-alt"></i> {{address}}</p>
           <span class="font-weight-normal pl-0 mr-2 bd-right badge" v-if="room">
             <i class="far fa-bed fa-lg mr-2"></i>
@@ -56,7 +82,7 @@
 <script>
 import isIn from 'validator/lib/isIn'
 export default{
-  props: ['price','name','image','address', 'tRooms',  'facilities', 'storage', 'home', 'slug', 'user_id', 'score'],
+  props: ['id', 'price_day','price_month','price_year','name','image','address', 'tRooms',  'facilities', 'storage', 'home', 'slug', 'user_id', 'score'],
   data(){
     return {
       wifi: false,

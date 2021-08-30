@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->text('address')->nullable();
             $table->string('fullname')->nullable();
             $table->string('phone',20)->nullable();
+            $table->string('izin_bangunan')->nullable();
             $table->string('password');
             $table->string('avatar')->default('default.png');
             $table->string('role',20)->default('guest');

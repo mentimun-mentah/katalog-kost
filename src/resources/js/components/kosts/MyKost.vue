@@ -34,18 +34,43 @@
         <div class="row" v-if="allKosts && allKosts.data && allKosts.data.length > 0">
           <div class="col-sm-12 col-md-6 col-lg-4 mb-3" v-for="(kost, index) in allKosts.data" :key="index">
             <div class="card shadow-card bor-rad-top-10 mt-2 mb-2">
-              <img 
-                class="card-img-top bor-rad-top-10 img-fit kost-img" 
-                :src="storage + '/kosts/' + kost.image" 
-                alt="Card image cap"
-              >
+              <div :id="'imageCarousel'+index" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                  <div 
+                    class="carousel-item" v-for="(img, i) in kost.image.split(',')" :key="i"
+                    :class="[i == 0 ? 'active' : '']"
+                    >
+                    <img 
+                      class="card-img-top bor-rad-top-10 img-fit kost-img" 
+                      :src="storage + '/kosts/' + img" 
+                      alt="Card image cap"
+                    >
+                  </div>
+                </div>
+                <a class="carousel-control-prev" :href="'#imageCarousel'+index" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" :href="'#imageCarousel'+index" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </div>
               <div class="card-body">
                 <h5 class="card-title font-weight-bold text-truncate">{{kost.name}}</h5>
-                <p class="fs-16">
-                  Rp.{{formatNumber(kost.price)}}
+                <p class="fs-16 mb-0" v-if="kost.price_day">
+                  Rp.{{formatNumber(kost.price_day)}}
+                  <small class="fs-14">/ hari</small>
+                </p>
+                <p class="fs-16 mb-0" v-if="kost.price_month">
+                  Rp.{{formatNumber(kost.price_month)}}
                   <small class="fs-14">/ bulan</small>
                 </p>
-                <p class="card-text fs-12 text-secondary text-truncate">
+                <p class="fs-16 mb-0" v-if="kost.price_year">
+                  Rp.{{formatNumber(kost.price_year)}}
+                  <small class="fs-14">/ tahun</small>
+                </p>
+                <p class="card-text fs-12 text-secondary text-truncate mt-3">
                   <i class="fal fa-map-marker-alt"></i>
                   {{kost.address}}
                 </p>
@@ -110,8 +135,9 @@ export default {
       allKosts: {},
       options: [
         {text: 'Semua', value: ''},
-        {text: 'Mahasiswa', value: 'mahasiswa'},
         {text: 'Umum', value: 'umum'},
+        {text: 'Perempuan', value: 'perempuan'},
+        {text: 'Laki-laki', value: 'laki-laki'},
       ]
     }
   },
@@ -119,6 +145,7 @@ export default {
     getAllKosts(page = 1){
       axios.get(`/kosts/get-my-kost?page=${page}&q=${this.search}&category=${this.selected}`)
         .then(res => {
+          console.log(res.data.data)
           this.allKosts = res.data
         })
     },

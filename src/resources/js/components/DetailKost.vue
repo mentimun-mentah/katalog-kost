@@ -11,11 +11,33 @@
 
   <section class="px-0 py-3">
     <div class="container">
-      <div class="image-left-radius big-img-desktop">
-        <div class="smooth-image-wrapper">
-          <img :src="storage + '/kosts/' + kost.image" alt="kos" class="smooth-image img-visible img-fluid" style="object-fit: cover;">
+
+      <div id="cardImageCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+          <div 
+            class="carousel-item" v-for="(img, i) in kost.image.split(',')" :key="i"
+            :class="[i == 0 ? 'active' : '']"
+            >
+
+            <div class="image-left-radius big-img-desktop">
+              <div class="smooth-image-wrapper">
+                <img :src="storage + '/kosts/' + img" alt="kos" class="smooth-image img-visible img-fluid" style="object-fit: cover;">
+              </div>
+            </div>
+
+          </div>
+
         </div>
+        <a class="carousel-control-prev" href="#cardImageCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#cardImageCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
+
     </div>
   </section>
 
@@ -279,7 +301,15 @@
     <div class="col-4">
       <div class="card property-inquiry text-center rounded-inquiry shadow mt-5 border-0">
         <div class="card-body">
-          <h5 class="card-title mt-0 fs-18 mb-1 pb-1">Rp.{{formatNumber(kost.price)}} / bulan</h5>
+          <h5 class="card-title mt-0 fs-16 mb-0 pb-1" v-if="kost.price_day">
+            Rp.{{formatNumber(kost.price_day)}} / hari
+          </h5>
+          <h5 class="card-title mt-0 fs-16 mb-0 pb-1" v-if="kost.price_month">
+            Rp.{{formatNumber(kost.price_month)}} / bulan
+          </h5>
+          <h5 class="card-title mt-0 fs-16 mb-0 pb-1" v-if="kost.price_year">
+            Rp.{{formatNumber(kost.price_year)}} / tahun
+          </h5>
           <hr>
           <h4 class="fs-14 text-left">
             Kategori:

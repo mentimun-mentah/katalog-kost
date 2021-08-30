@@ -49,6 +49,11 @@
                     <td>:</td>
                     <td style="white-space: normal;">{{user.address}}</td>
                   </tr>
+                  <tr>
+                    <td>No. Izin Bangunan</td>
+                    <td>:</td>
+                    <td style="white-space: normal;">{{user.izin_bangunan}}</td>
+                  </tr>
                 </table>
                 <center class="mt-3">
                   <button class="btn btn-success btn-sm m-r-0" @click="acceptOwner(user.id)">Terima</button>

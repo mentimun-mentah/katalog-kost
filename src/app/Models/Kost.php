@@ -11,7 +11,8 @@ class Kost extends Model
 
   protected $fillable = [
     'image', 'name','slug',
-    'category','total_rooms','price',
+    'category','total_rooms',
+    'price_day', 'price_month', 'price_year',
     'facilities','lat','lng',
     'address', 'desc', 'user_id'
   ];

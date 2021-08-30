@@ -10,32 +10,42 @@
         <div class="col-sm-12 col-md-12 col-lg-12">
           <div class="card-body">
             <div class="form-row">
-              <div class="form-group col-md-2 col-sm-8">
+              <div class="form-group">
                 <label>Foto Kos</label>
-                <img
-                  id="image-preview"
-                  class="card-img-top img-fit upload-img p-t-4 p-r-4 p-b-4 p-l-4 border"
-                  alt="Card image cap"
-                  :src="
-                      url_image
-                          ? url_image
-                          : 'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png'
-                  "
-                />
-                <div
-                   class="file-btn btn btn-sm button border mt-2"
-                >
-                  Upload
-                  <input
-                    type="file"
-                    class="fileupload"
-                    name="file"
-                    accept="image/*"
-                    @change="changeKost"
-                  />
-                </div>
-                <small class="text-danger" v-if="errors.image" style="white-space: nowrap;">
-                  {{ errors.image[0] }}
+                <div class="row">
+
+                  <div class="col" v-for="i in 3" :key="i - 1">
+                    <img
+                      id="image-preview"
+                      class="card-img-top img-fit upload-img p-t-4 p-r-4 p-b-4 p-l-4 border"
+                      alt="Card image cap"
+                      :src="
+                          url_image[i - 1]
+                              ? url_image[i - 1]
+                              : 'https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png'
+                      "
+                    />
+                    <div class="w-100 text-center">
+                      <div class="file-btn btn btn-sm button border mt-2">
+                        Upload
+                        <input
+                          type="file"
+                          class="fileupload"
+                          name="file[]"
+                          accept="image/*"
+                          @change="(e) => changeKost(e, i - 1)"
+                        />
+                      </div>
+                    </div><!--/w-100-->
+                    <small class="text-danger" v-if="errors && errors[`images.${i-1}`]" style="white-space: nowrap;">
+                      {{errors && errors[`images.${i-1}`][0]}}
+                    </small>
+
+                  </div><!--/col-->
+                  
+                </div><!--/row-->
+                <small class="text-danger" v-if="errors && errors.images" style="white-space: nowrap;">
+                  {{errors && errors.images && errors.images[0]}}
                 </small>
               </div>
 
@@ -52,21 +62,22 @@
                 </small>
               </div>
 
-              <div class="form-group col-md-4 col-sm-4">
+              <div class="form-group col-md-6 col-sm-6">
                 <label>Kategori</label>
                 <select class="form-control" v-model="add_kost.category">
                     <option disabled value=""
                         >Please select one</option
                     >
-                    <option value="mahasiswa">Mahasiswa</option>
                     <option value="umum">Umum</option>
+                    <option value="perempuan">Perempuan</option>
+                    <option value="laki-laki">Laki-laki</option>
                 </select>
                 <small class="text-danger" v-if="errors.category">
                   {{ errors.category[0] }}
                 </small>
               </div>
 
-              <div class="form-group col-md-4 col-sm-4">
+              <div class="form-group col-md-6 col-sm-6">
                 <label>Jumlah Kamar</label>
                 <input
                   type="number"
@@ -80,24 +91,56 @@
               </div>
 
               <div class="form-group col-md-4 col-sm-4">
-                <label>Harga Kos <small>/bulan</small></label>
+                <label>Harga Kos <small>/hari</small></label>
                 <div class="input-group">
                   <div class="input-group-prepend">
-                    <span
-                      class="input-group-text"
-                      id="basic-addon1"
-                      >Rp</span
-                    >
+                    <span class="input-group-text" id="basic-addon1">Rp</span>
                   </div>
                   <input
                     type="number"
                     class="form-control"
                     placeholder="Harga Kos"
-                    v-model="add_kost.price"
+                    v-model="add_kost.price_day"
                   />
                 </div>
-                <small class="text-danger" v-if="errors.price">
-                  {{ errors.price[0] }}
+                <small class="text-danger" v-if="errors.price_day">
+                  {{ errors.price_day[0] }}
+                </small>
+              </div>
+
+              <div class="form-group col-md-4 col-sm-4">
+                <label>Harga Kos <small>/bulan</small></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Rp</span>
+                  </div>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Harga Kos"
+                    v-model="add_kost.price_month"
+                  />
+                </div>
+                <small class="text-danger" v-if="errors.price_month">
+                  {{ errors.price_month[0] }}
+                </small>
+              </div>
+
+              <div class="form-group col-md-4 col-sm-4">
+                <label>Harga Kos <small>/tahun</small></label>
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">Rp</span>
+                  </div>
+                  <input
+                    type="number"
+                    class="form-control"
+                    placeholder="Harga Kos"
+                    v-model="add_kost.price_year"
+                  />
+                </div>
+                <small class="text-danger" v-if="errors.price_year">
+                  {{ errors.price_year[0] }}
                 </small>
               </div>
 
@@ -200,7 +243,11 @@
             </div>
             <!--/form-row-->
 
-            <button class="btn btn-green float-right mb-3" @click="addKost">
+            <button 
+              class="btn btn-green float-right mb-3" 
+              @click="addKost"
+              :disabled="saveDisabled"
+            >
               Simpan
             </button>
           </div>
@@ -241,7 +288,8 @@ import _ from 'lodash'
 export default {
   data() {
     return {
-      url_image: null,
+      saveDisabled: true,
+      url_image: [],
       wifi: false,
       room: false,
       ac: false,
@@ -249,37 +297,50 @@ export default {
       wardrobe: false,
       tv: false,
       add_kost: {
-        image: null,
+        image: [],
         name: "",
         category: "",
         total_rooms: 0,
-        price: 0,
+        price_day: 0,
+        price_month: 0,
+        price_year: 0,
         facilities: [],
         lat: "",
         lng: "",
         address: "",
         desc: ""
       },
-      errors: []
+      errors: [],
     }
   },
   methods:{
-    changeKost(e){
-      this.add_kost.image = e.target.files[0];
-      this.url_image = URL.createObjectURL(this.add_kost.image);
+    insertAt(arr, index, elements) {
+      arr.splice(index, 1)
+      arr.splice(index, 0, elements)
+      return arr
+    },
+    changeKost(e, i){
+      this.add_kost.image = this.insertAt(this.add_kost.image, i, e.target.files[0])
+      this.url_image = this.insertAt(this.url_image, i, URL.createObjectURL(e.target.files[0]))
     },
     addKost(){
       let formData = new FormData();
-      formData.append("image", this.add_kost.image)
+      this.add_kost.image.forEach((img,i) => {
+        formData.append("images[]", img)
+      })
       formData.append("name", this.add_kost.name)
       formData.append("category", this.add_kost.category)
       formData.append("total_rooms", this.add_kost.total_rooms)
-      formData.append("price", this.add_kost.price)
       formData.append("facilities", this.add_kost.facilities.join(','))
       formData.append("lat", this.add_kost.lat)
       formData.append("lng", this.add_kost.lng)
       formData.append("address", this.add_kost.address)
       formData.append("desc", this.add_kost.desc)
+
+      if(this.add_kost.price_day > 0) formData.append("price_day", this.add_kost.price_day)
+      if(this.add_kost.price_month > 0) formData.append("price_month", this.add_kost.price_month)
+      if(this.add_kost.price_year > 0) formData.append("price_year", this.add_kost.price_year)
+
       const config = {
           headers: { "content-type": "multipart/form-data" }
       };
@@ -287,12 +348,14 @@ export default {
       axios.post('/kosts/create-kost',formData,config).then(res => {
         this.$toast.success(res.data.status);
         this.errors = [];
-        this.url_image = null
-        this.add_kost.image = null
+        this.url_image = []
+        this.add_kost.image = []
         this.add_kost.name = ""
         this.add_kost.category = ""
         this.add_kost.total_rooms = 0
-        this.add_kost.price = 0
+        this.add_kost.price_day = 0
+        this.add_kost.price_month = 0
+        this.add_kost.price_year = 0
         this.add_kost.facilities = []
         this.add_kost.lat = ""
         this.add_kost.lng = ""
@@ -305,11 +368,24 @@ export default {
         this.wardrobe = false
         this.tv = false
       }).catch(err => {
+        console.log(err.response)
         this.errors = err.response.data.errors;
       })
     },
   },
   watch: {
+    'add_kost.price_day'(val){
+      if(val > 0) this.saveDisabled = false;
+      else this.saveDisabled = true;
+    },
+    'add_kost.price_month'(val){
+      if(val > 0) this.saveDisabled = false;
+      else this.saveDisabled = true;
+    },
+    'add_kost.price_year'(val){
+      if(val > 0) this.saveDisabled = false;
+      else this.saveDisabled = true;
+    },
     wifi(val){
       if(val) this.add_kost.facilities.push('wifi')
       else {
@@ -375,7 +451,6 @@ export default {
     cursor: pointer;
     text-align: center;
     margin: 0 auto;
-    left: 21%;
 }
 .fileupload {
     cursor: pointer;

@@ -100,10 +100,13 @@
             @mouseover="toggleInfoWindow(m,m.id)"
             @mouseout="infoWinOpen = !infoWinOpen">
             <app-card 
+              :id="m.id"
               :home="home"
               :slug="m.slug"
               :user_id="m.user_id"
-              :price="m.price" 
+              :price_day="m.price_day" 
+              :price_month="m.price_month" 
+              :price_year="m.price_year" 
               :name="m.name" 
               :image="m.image" 
               :score="m.score"
@@ -115,6 +118,11 @@
             </app-card>
           </div>
         </transition-group>
+
+        <div class="text-center py-5 text-muted" v-if="circle_markers && circle_markers.length < 1">
+          <i class="fad fa-boxes-alt fa-4x"></i>
+          <p class="mt-2 mb-0">Tidak ada data</p>
+        </div>
 
       </div>
 
@@ -135,8 +143,9 @@ export default {
       totalKost: 0,
       options: [
         {text: 'Semua', value: ''},
-        {text: 'Mahasiswa', value: 'mahasiswa'},
         {text: 'Umum', value: 'umum'},
+        {text: 'Perempuan', value: 'perempuan'},
+        {text: 'Laki-laki', value: 'laki-laki'},
       ],
       center: { lat: -8.575592160439113, lng: 115.14241867639127 },
       searchLoading: false,
@@ -314,9 +323,18 @@ export default {
     },
     toggleInfoWindow(marker, idx) {
       let content = `
-      <h6 class="font-weight-bold" style="padding:15px;padding-bottom:7px;"> 
-        ${this.kFormatter(marker.price)} 
-      </h6>`
+      <div>
+        <h6 class="font-weight-bold mb-0 ${marker.price_day <= 0 ? 'd-none' : ''}" style="padding:10px;padding-bottom:7px;"> 
+          ${this.kFormatter(marker.price_day)} /hari
+        </h6>
+        <h6 class="font-weight-bold mb-0 ${marker.price_month <= 0 ? 'd-none' : ''}" style="padding:10px;padding-bottom:7px;"> 
+          ${this.kFormatter(marker.price_month)} /bulan
+        </h6>
+        <h6 class="font-weight-bold mb-0 ${marker.price_year <= 0 ? 'd-none' : ''}" style="padding:10px;padding-bottom:7px;"> 
+          ${this.kFormatter(marker.price_year)} /tahun
+        </h6>
+      </div>
+        `
       this.infoWindowPos = {lat: marker.lat, lng: marker.lng};
       this.infoOptions.content = content;
       this.infoWinOpen = true;
@@ -324,7 +342,7 @@ export default {
     },
     markerInfoWindow(marker,idx){
       let content = `
-      <img src="${this.storage}/kosts/${marker.image}" class="img-marker">
+      <img src="${this.storage}/kosts/${marker.image.split(',')[0]}" class="img-marker">
       <div class="info">
         <div class="location text-truncate">
         <i class="fal fa-map-marker-alt mr-1"></i> <span class="text-secondary">${marker.address}</span>

@@ -29,21 +29,51 @@
     <div class="row mt-4" v-if="newestKost && newestKost.length > 0">
       <div class="col-lg-4" v-for="kost in newestKost" :key="kost.id">
         <div class="card shadow-card bor-rad-top-10 mt-2 mb-2">
-          <img class="card-img-top bor-rad-top-10 img-fit kost-img" 
-            :src="storage + '/kosts/' + kost.image" 
-            alt="Card image cap"
-            >
+
+          <div :id="'cardImageCarousel'+kost.id" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div 
+                class="carousel-item" v-for="(img, i) in kost.image.split(',')" :key="i"
+                :class="[i == 0 ? 'active' : '']"
+                >
+                <img 
+                  class="card-img-top bor-rad-top-10 img-fit kost-img" 
+                  :src="storage + '/kosts/' + img" 
+                  alt="Card image cap"
+                >
+              </div>
+            </div>
+            <a class="carousel-control-prev" :href="'#cardImageCarousel'+kost.id" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" :href="'#cardImageCarousel'+kost.id" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+
           <div class="card-body">
             <h5 class="card-title font-weight-bold text-truncate">
               <a :href="home + '/detail-kos/' + kost.slug + '/' + kost.user_id" class="text-reset">
                 {{kost.name}}
               </a>
             </h5>
-            <p class="fs-16">
-            Rp.{{formatNumber(kost.price)}}
+
+            <p class="fs-16 mb-0" v-if="kost.price_day">
+              Rp.{{formatNumber(kost.price_day)}}
+              <small class="fs-14">/ hari</small>
+            </p>
+            <p class="fs-16 mb-0" v-if="kost.price_month">
+              Rp.{{formatNumber(kost.price_month)}}
               <small class="fs-14">/ bulan</small>
             </p>
-            <p class="card-text fs-12 text-secondary text-truncate">
+            <p class="fs-16 mb-0" v-if="kost.price_year">
+              Rp.{{formatNumber(kost.price_year)}}
+              <small class="fs-14">/ tahun</small>
+            </p>
+
+            <p class="card-text fs-12 text-secondary text-truncate mt-3">
               <i class="fal fa-map-marker-alt"></i>
               {{kost.address}}
             </p>
@@ -104,21 +134,50 @@
     <div class="row mt-4" v-if="allKost && allKost.length > 0">
       <div class="col-lg-4" v-for="kost in allKost" :key="kost.id">
         <div class="card shadow-card bor-rad-top-10 mt-2 mb-2">
-          <img class="card-img-top bor-rad-top-10 img-fit kost-img" 
-            :src="storage + '/kosts/' + kost.image" 
-            alt="Card image cap"
-            >
+          <div :id="'imageCarousel'+kost.id" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div 
+                class="carousel-item" v-for="(img, i) in kost.image.split(',')" :key="i"
+                :class="[i == 0 ? 'active' : '']"
+                >
+                <img 
+                  class="card-img-top bor-rad-top-10 img-fit kost-img" 
+                  :src="storage + '/kosts/' + img" 
+                  alt="Card image cap"
+                >
+              </div>
+            </div>
+            <a class="carousel-control-prev" :href="'#imageCarousel'+kost.id" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" :href="'#imageCarousel'+kost.id" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+
           <div class="card-body">
             <h5 class="card-title font-weight-bold text-truncate">
               <a :href="home + '/detail-kos/' + kost.slug + '/' + kost.user_id" class="text-reset">
                 {{kost.name}}
               </a>
             </h5>
-            <p class="fs-16">
-            Rp.{{formatNumber(kost.price)}}
+
+            <p class="fs-16 mb-0" v-if="kost.price_day">
+              Rp.{{formatNumber(kost.price_day)}}
+              <small class="fs-14">/ hari</small>
+            </p>
+            <p class="fs-16 mb-0" v-if="kost.price_month">
+              Rp.{{formatNumber(kost.price_month)}}
               <small class="fs-14">/ bulan</small>
             </p>
-            <p class="card-text fs-12 text-secondary text-truncate">
+            <p class="fs-16 mb-0" v-if="kost.price_year">
+              Rp.{{formatNumber(kost.price_year)}}
+              <small class="fs-14">/ tahun</small>
+            </p>
+
+            <p class="card-text fs-12 text-secondary text-truncate mt-3">
               <i class="fal fa-map-marker-alt"></i>
               {{kost.address}}
             </p>
@@ -140,7 +199,11 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="text-center py-5 text-muted" v-else>
+      <i class="fad fa-boxes-alt fa-4x"></i>
+      <p class="mt-2 mb-0">Tidak ada data</p>
     </div>
   </section>
 </div>
